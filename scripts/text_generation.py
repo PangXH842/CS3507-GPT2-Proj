@@ -19,7 +19,6 @@ def generate_text(prompt, model=1):
         max_length=200,
     )
     gen_text = tokenizer.batch_decode(gen_tokens)[0]
-    gen_text = str(gen_text)
 
     return gen_text
 
@@ -34,6 +33,7 @@ if __name__ == "__main__":
             model = 1 - model
             continue
         output = generate_text(prompt)
+        output = str(output).strip()
         print("="*40)
         print(output)
         print("="*40)

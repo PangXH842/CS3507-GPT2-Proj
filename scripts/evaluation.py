@@ -4,7 +4,7 @@ import pandas as pd
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from nltk.translate.bleu_score import sentence_bleu
 
-def generate_text(model, tokenizer, prompt, max_length=100):
+def generate_text(model, tokenizer, prompt, max_length=50):
     input_ids = tokenizer(prompt, return_tensors="pt").input_ids
     gen_tokens = model.generate(
         input_ids,
@@ -35,14 +35,13 @@ if __name__ == "__main__":
     # Parse arguments
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_path', type=str, default="./models/wikitext", help="Path to the model directory")
-    parser.add_argument('--tokenizer_path', type=str, default="./models/wikitext", help="Path to the tokenizer directory")
     parser.add_argument('--eval_file', type=str, default="./evaluation/evaluation_texts.csv", help="Path to the evaluation CSV file")
     args = parser.parse_args()
 
     try:
         # Load model and tokenizer
         model = GPT2LMHeadModel.from_pretrained(args.model_path)
-        tokenizer = GPT2Tokenizer.from_pretrained(args.tokenizer_path)
+        tokenizer = GPT2Tokenizer.from_pretrained(args.model_path)
         tokenizer.pad_token = tokenizer.eos_token
     except Exception as e:
         print(f"Error loading model or tokenizer: {e}")
@@ -58,6 +57,8 @@ if __name__ == "__main__":
         print(f"Error loading CSV file: {e}")
         exit(1)
 
+    total_perplexity = 0
+    total_bleu = 0
     for index, row in df.iterrows():
         prompt = row['prompt']
         references = row['references'].split('|')
@@ -71,7 +72,12 @@ if __name__ == "__main__":
         # Calculate perplexity
         perplexity = calculate_perplexity(model, tokenizer, generated_text)
         print(f"Perplexity: {perplexity}")
+        total_perplexity+=perplexity
 
         # Evaluate BLEU score
         bleu_score = evaluate_bleu(references, generated_text)
         print(f"BLEU score: {bleu_score}")
+        total_bleu+=bleu_score
+
+    print(f"\nAverage Perplexity: {total_perplexity/df.shape[0]}")
+    print(f"Average BLEU score: {total_bleu/df.shape[0]}")
