@@ -1,0 +1,3 @@
+Hello, how are you doing today? I hope everything is going well.
+This is a sample text file to demonstrate the tokenization process.
+Feel free to add more sentences to see how the tokenizer handles different text.

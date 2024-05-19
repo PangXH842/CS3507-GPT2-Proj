@@ -1,9 +1,21 @@
 import torch
 import math
 import argparse
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class SinusoidalPositionalEncoding(torch.nn.Module):
     def __init__(self, d_model, max_len=5000):
+        """
+        Sinusoidal Positional Encoding module.
+
+        Args:
+            d_model (int): The dimension of the model.
+            max_len (int): The maximum length of the sequences to be encoded.
+        """
         super(SinusoidalPositionalEncoding, self).__init__()
         
         # Create a matrix of shape (max_len, d_model) to store the positional encodings
@@ -25,40 +37,88 @@ class SinusoidalPositionalEncoding(torch.nn.Module):
         self.register_buffer('pe', pe)
 
     def forward(self, x):
+        """
+        Adds positional encoding to the input tensor.
+
+        Args:
+            x (torch.Tensor): The input tensor.
+
+        Returns:
+            torch.Tensor: The tensor with positional encoding added.
+        """
         return x + self.pe[:x.size(0), :]
 
 class LearnablePositionalEmbedding(torch.nn.Module):
     def __init__(self, max_len, d_model):
+        """
+        Learnable Positional Embedding module.
+
+        Args:
+            max_len (int): The maximum length of the sequences to be encoded.
+            d_model (int): The dimension of the model.
+        """
         super(LearnablePositionalEmbedding, self).__init__()
         self.position_embeddings = torch.nn.Embedding(max_len, d_model)
 
     def forward(self, x):
+        """
+        Adds learnable positional embeddings to the input tensor.
+
+        Args:
+            x (torch.Tensor): The input tensor.
+
+        Returns:
+            torch.Tensor: The tensor with positional embeddings added.
+        """
         seq_len = x.size(0)
         position_ids = torch.arange(seq_len, dtype=torch.long, device=x.device)
         position_ids = position_ids.unsqueeze(1).expand_as(x[:, :, 0])
         return x + self.position_embeddings(position_ids)
 
 def choose_encoder(args):
-    match args.encoder:
-        case "spe":
-            pos_encoder = SinusoidalPositionalEncoding(args.d_model, args.max_len)
-        case "lpe":
-            pos_encoder = LearnablePositionalEmbedding(args.d_model, args.max_len)
+    """
+    Chooses the positional encoding method based on the provided arguments.
+
+    Args:
+        args (argparse.Namespace): The command-line arguments.
+
+    Returns:
+        torch.nn.Module: The selected positional encoding module.
+    """
+    if args.encoder == "spe":
+        pos_encoder = SinusoidalPositionalEncoding(args.d_model, args.max_len)
+    elif args.encoder == "lpe":
+        pos_encoder = LearnablePositionalEmbedding(args.d_model, args.max_len)
+    else:
+        raise ValueError(f"Unknown encoder type: {args.encoder}")
     return pos_encoder
 
 def main(args):
-    pos_encoder = choose_encoder(args)
+    """
+    Main function to apply positional encoding to a sample input tensor.
 
-    # Sample input tensor (seq_len, batch_size, d_model)
-    input_tensor = torch.zeros(50, 32, args.d_model)
-    output_tensor = pos_encoder(input_tensor)
-    print(output_tensor.shape)  # Should print torch.Size([50, 32, 512])
+    Args:
+        args (argparse.Namespace): The command-line arguments.
+    """
+    try:
+        pos_encoder = choose_encoder(args)
+        logger.info(f"Using encoder: {args.encoder}")
+
+        # Sample input tensor (seq_len, batch_size, d_model)
+        input_tensor = torch.zeros(50, 32, args.d_model)
+        output_tensor = pos_encoder(input_tensor)
+        logger.info(f"Output tensor shape: {output_tensor.shape}")
+        print(output_tensor.shape)  # Should print torch.Size([50, 32, 512])
+
+    except Exception as e:
+        logger.error(f"Error: {e}")
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--encoder', type=str, default='bpe')
-    parser.add_argument('--d_model', type=int, default=512)
-    parser.add_argument('--max_len', type=int, default=5000)
+    parser = argparse.ArgumentParser(description="Apply positional encoding to an input tensor.")
+    parser.add_argument('--encoder', type=str, choices=['spe', 'lpe'], default='spe', help="Type of positional encoding to use.")
+    parser.add_argument('--d_model', type=int, default=512, help="Dimension of the model.")
+    parser.add_argument('--max_len', type=int, default=5000, help="Maximum length of the sequences to be encoded.")
     args = parser.parse_args()
 
     main(args)
