@@ -1,13 +1,8 @@
 import torch
 import torch.nn.functional as F
 import argparse
-import logging
 import math
 import os
-
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 class ScaledDotProductAttention(torch.nn.Module):
     def __init__(self, d_model):
@@ -113,42 +108,40 @@ def get_attention(args):
     return attn
 
 def main(args):
-    try:
-        # Get attention method
-        attn = get_attention(args)
-        logger.info(f"Using attention mechanism: {args.attention}")
+    # Get attention method
+    attn = get_attention(args)
+    print(f"Using attention mechanism: {args.attention}")
 
-        # Set input tensors (batch_size, seq_len, d_model)
-        q = torch.rand(32, 50, args.d_model)
-        k = torch.rand(32, 50, args.d_model)
-        v = torch.rand(32, 50, args.d_model)
-        mask = None  
+    # Set input tensors (batch_size, seq_len, d_model)
+    q = torch.rand(args.batch_size, args.seq_len, args.d_model)
+    k = torch.rand(args.batch_size, args.seq_len, args.d_model)
+    v = torch.rand(args.batch_size, args.seq_len, args.d_model)
 
-        # Generate attention vectors
-        output, attention_weights = attn(q, k, v)
+    # Generate attention vectors
+    output, attention_weights = attn(q, k, v)
 
-        logger.info(f"Output tensor shape: {output.shape}")
-        print(output.shape)
+    print(f"Output tensor shape: {output.shape}")
+    print(output.shape)
 
-        # Save output to file if provided
-        if args.output_path:
-            output_dir = os.path.dirname(args.output_path)
-            if not os.path.exists(output_dir):
-                os.makedirs(output_dir)
-            
-            with open(args.output_path, 'w') as f:
-                f.write(f"Output tensor shape: {output.shape}\n")
-                f.write(f"Output tensor: {output}\n")
-            logger.info(f"Output saved to: {args.output_path}")
-
-    except Exception as e:
-        logger.error(f"Error: {e}")
-        print(f"Error: {e}")
+    # Save output to file if provided
+    if args.output_path:
+        output_dir = os.path.dirname(args.output_path)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        
+        with open(args.output_path, 'w') as f:
+            f.write(f"Output tensor shape: {output.shape}\n")
+            f.write(f"Output tensor: {output}\n")
+        print(f"Output saved to: {args.output_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Apply different attention mechanisms to input tensors.")
     parser.add_argument('--attention', type=str, choices=['scaled_dot_product', 'multi_head', 'linear', 'nystrom'], default='scaled_dot_product', help="Type of attention mechanism to use.")
     parser.add_argument('--d_model', type=int, default=512, help="Dimension of the model.")
+    parser.add_argument('--text', type=str, default="Hello, how are you?", help="Text to encode. Ignored if --text_path is provided.")
+    parser.add_argument('--text_path', type=str, default=None, help="Path to a text file to encode.")
+    parser.add_argument('--batch_size', type=int, default=32, help="Batch size for positional encoder.")
+    parser.add_argument('--seq_len', type=int, default=50, help="Length of the sequence to be encoded.")
     parser.add_argument('--num_heads', type=int, default=8, help="Number of attention heads (for multi-head attention).")
     parser.add_argument('--num_landmarks', type=int, default=10, help="Number of landmarks (for Nyström attention).")
     parser.add_argument('--output_path', type=str, default=None, help="Path to save the encoded and decoded output.")

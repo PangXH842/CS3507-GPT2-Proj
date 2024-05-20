@@ -3,16 +3,11 @@ import argparse
 import pandas as pd
 from transformers import GPT2LMHeadModel, GPT2Config
 from nltk.translate.bleu_score import sentence_bleu
-import logging
 import os
 
 from attention import get_attention
 from positionals import get_pos_encoder
 from token_encodings import get_tokenizer
-
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 def generate_text(model, tokenizer, prompt, max_length=50):
     input_ids = tokenizer(prompt, return_tensors="pt").input_ids
@@ -48,44 +43,37 @@ if __name__ == "__main__":
     parser.add_argument('--tokenizer', type=str, choices=['bpe', 'wordpiece', 'sentencepiece', 'unigram'], default='bpe', help="Type of tokenizer to use.")
     parser.add_argument('--attention', type=str, choices=['scaled_dot_product', 'multi_head', 'linear', 'nystrom'], default='scaled_dot_product', help="Type of attention mechanism to use.")
     parser.add_argument('--positional', type=str, choices=['spe', 'lpe'], default='spe', help="Type of positional encoding to use.")
+    parser.add_argument('--batch_size', type=int, default=32, help="Batch size for positional encoder.")
     parser.add_argument('--max_len', type=int, default=1000, help="Maximum length for positional encodings")
     parser.add_argument('--d_model', type=int, default=768, help="Model dimension size")
+    parser.add_argument('--num_landmarks', type=int, default=10, help="Number of landmarks (for Nyström attention).")
     args = parser.parse_args()
 
-    try:
-        # Load model configuration
-        config = GPT2Config.from_pretrained(args.model_path)
-        config.num_landmarks = 10  # Set number of landmarks for Nystrom attention
+    # Load model configuration
+    config = GPT2Config.from_pretrained(args.model_path)
+    config.num_landmarks = 10  # Set number of landmarks for Nystrom attention
 
-        # Load model
-        model = GPT2LMHeadModel.from_pretrained(args.model_path, config=config)
+    # Load model
+    model = GPT2LMHeadModel.from_pretrained(args.model_path, config=config)
 
-        # Load tokenizer
-        tokenizer = get_tokenizer(args.tokenizer)
+    # Load tokenizer
+    tokenizer = get_tokenizer(args)
 
-        # Load positional encoder
-        positional_encoding = get_pos_encoder(args.positional)
+    # Load positional encoder
+    positional_encoding = get_pos_encoder(args)
 
-        # Load attention mechanism
-        attention = get_attention(args.attention, config)
+    # Load attention mechanism
+    attention = get_attention(args)
 
-        # Apply for each layer
-        for layer in model.transformer.h:
-            layer.attn = attention
-            layer.attn.register_buffer('positional_encoding', positional_encoding(torch.zeros(1, 1, config.n_embd)))
+    # Apply for each layer
+    for layer in model.transformer.h:
+        layer.attn = attention
+        layer.attn.register_buffer('positional_encoding', positional_encoding(torch.zeros(1, 1, config.n_embd)))
 
-    except Exception as e:
-        logger.error(f"Error loading model or tokenizer: {e}")
-        exit(1)
-
-    try:
-        # Load evaluation texts from CSV
-        df = pd.read_csv(args.eval_file)
-        if 'prompt' not in df.columns or 'references' not in df.columns:
-            logger.error("CSV file must contain 'prompt' and 'references' columns.")
-            exit(1)
-    except Exception as e:
-        logger.error(f"Error loading CSV file: {e}")
+    # Load evaluation texts from CSV
+    df = pd.read_csv(args.eval_file)
+    if 'prompt' not in df.columns or 'references' not in df.columns:
+        print("[ERROR] CSV file must contain 'prompt' and 'references' columns.")
         exit(1)
 
     total_perplexity = 0
@@ -93,22 +81,22 @@ if __name__ == "__main__":
     for index, row in df.iterrows():
         prompt = row['prompt']
         references = row['references'].split('|')
-        logger.info(f"\nEvaluating prompt {index+1} of {df.shape[0]}: {prompt}")
+        print(f"\nEvaluating prompt {index+1} of {df.shape[0]}: {prompt}")
 
         # Generate text
         generated_text = generate_text(model, tokenizer, prompt)
         generated_text = str(generated_text).strip()
-        logger.info(f"Generated Text: {generated_text}")
+        print(f"Generated Text: {generated_text}")
 
         # Calculate perplexity
         perplexity = calculate_perplexity(model, tokenizer, generated_text)
-        logger.info(f"Perplexity: {perplexity}")
+        print(f"Perplexity: {perplexity}")
         total_perplexity += perplexity
 
         # Evaluate BLEU score
         bleu_score = evaluate_bleu(references, generated_text)
-        logger.info(f"BLEU score: {bleu_score}")
+        print(f"BLEU score: {bleu_score}")
         total_bleu += bleu_score
 
-    logger.info(f"\nAverage Perplexity: {total_perplexity/df.shape[0]}")
-    logger.info(f"Average BLEU score: {total_bleu/df.shape[0]}")
+    print(f"\nAverage Perplexity: {total_perplexity/df.shape[0]}")
+    print(f"Average BLEU score: {total_bleu/df.shape[0]}")

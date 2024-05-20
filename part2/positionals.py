@@ -1,12 +1,7 @@
 import torch
 import math
 import argparse
-import logging
 import os
-
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 class SinusoidalPositionalEncoding(torch.nn.Module):
     def __init__(self, d_model, max_len=1000):
@@ -43,47 +38,42 @@ class LearnablePositionalEmbedding(torch.nn.Module):
         return x + self.position_embeddings(position_ids)
 
 def get_pos_encoder(args):
-    if args.encoder == "spe":
+    if args.positional == "spe":
         pos_encoder = SinusoidalPositionalEncoding(args.d_model, args.max_len)
-    elif args.encoder == "lpe":
+    elif args.positional == "lpe":
         pos_encoder = LearnablePositionalEmbedding(args.d_model, args.max_len)
     else:
-        raise ValueError(f"Unknown encoder type: {args.encoder}")
+        raise ValueError(f"Unknown encoder type: {args.positional}")
     return pos_encoder
 
 def main(args):
-    try:
-        # Get positional encoder
-        pos_encoder = get_pos_encoder(args)
-        logger.info(f"Using encoder: {args.encoder}")
+    # Get positional encoder
+    pos_encoder = get_pos_encoder(args)
+    print(f"Using encoder: {args.positional}")
 
-        # Set input tensor (seq_len, batch_size, d_model)
-        input_tensor = torch.zeros(args.seq_len, args.batch_size, args.d_model)
+    # Set input tensor (seq_len, batch_size, d_model)
+    input_tensor = torch.zeros(args.seq_len, args.batch_size, args.d_model)
+    
+    # Encode positions
+    output_tensor = pos_encoder(input_tensor)
+    print(f"Output tensor shape: {output_tensor.shape}")
+    print(output_tensor)
+    print(output_tensor.shape)  
+
+    # Save output to file if provided
+    if args.output_path:
+        output_dir = os.path.dirname(args.output_path)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
         
-        # Encode positions
-        output_tensor = pos_encoder(input_tensor)
-        logger.info(f"Output tensor shape: {output_tensor.shape}")
-        print(output_tensor)
-        print(output_tensor.shape)  
-
-        # Save output to file if provided
-        if args.output_path:
-            output_dir = os.path.dirname(args.output_path)
-            if not os.path.exists(output_dir):
-                os.makedirs(output_dir)
-            
-            with open(args.output_path, 'w') as f:
-                f.write(f"Output tensor shape: {output_tensor.shape}\n")
-                f.write(f"Output tensor: {output_tensor}\n")
-            logger.info(f"Output saved to: {args.output_path}")
-
-    except Exception as e:
-        logger.error(f"Error: {e}")
-        print(f"Error: {e}")
+        with open(args.output_path, 'w') as f:
+            f.write(f"Output tensor shape: {output_tensor.shape}\n")
+            f.write(f"Output tensor: {output_tensor}\n")
+        print(f"Output saved to: {args.output_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Apply positional encoding to an input tensor.")
-    parser.add_argument('--encoder', type=str, choices=['spe', 'lpe'], default='spe', help="Type of positional encoding to use.")
+    parser.add_argument('--positional', type=str, choices=['spe', 'lpe'], default='spe', help="Type of positional encoding to use.")
     parser.add_argument('--d_model', type=int, default=512, help="Dimension of the model.")
     parser.add_argument('--batch_size', type=int, default=32, help="Batch size for positional encoder.")
     parser.add_argument('--seq_len', type=int, default=50, help="Length of the sequence to be encoded.")

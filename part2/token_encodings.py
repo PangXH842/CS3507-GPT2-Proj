@@ -1,14 +1,9 @@
 import argparse
 from transformers import GPT2Tokenizer, BertTokenizer, AlbertTokenizer, XLNetTokenizer
 import os
-import logging
 
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-def get_tokenizer(t):
-    match t:
+def get_tokenizer(args):
+    match args.tokenizer:
         case "bpe":         # Byte Pair Encoding
             tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
         case "wordpiece":
@@ -18,54 +13,49 @@ def get_tokenizer(t):
         case "unigram":
             tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
         case _:
-            raise ValueError(f"Unknown tokenizer type: {t}")
+            raise ValueError(f"Unknown tokenizer type: {args.tokenizer}")
     tokenizer.pad_token = tokenizer.eos_token
     return tokenizer
 
 def main(args):
-    try:
-        # Get tokenizer
-        tokenizer = get_tokenizer(args.tokenizer)
-        logger.info(f"Using tokenizer: {args.tokenizer}")
+    # Get tokenizer
+    tokenizer = get_tokenizer(args.tokenizer)
+    print(f"Using tokenizer: {args.tokenizer}")
 
-        # Read text from file if path is provided, else use provided text
-        if args.text_path:
-            if not os.path.exists(args.text_path):
-                raise FileNotFoundError(f"Text file not found: {args.text_path}")
-            with open(args.text_path, 'r') as f:
-                text = f.read()
-        else:
-            text = args.text
+    # Read text from file if path is provided, else use provided text
+    if args.text_path:
+        if not os.path.exists(args.text_path):
+            raise FileNotFoundError(f"Text file not found: {args.text_path}")
+        with open(args.text_path, 'r') as f:
+            text = f.read()
+    else:
+        text = args.text
 
-        # Print text from input
-        logger.info(f"Text to encode: {text}")
-        print(f"Original text: {text}")
+    # Print text from input
+    print(f"Text to encode: {text}")
+    print(f"Original text: {text}")
 
-        # Encode tokens
-        tokens = tokenizer.encode(text)
-        logger.info(f"Encoded tokens: {tokens}")
-        print(f"Encoded tokens: {tokens}")
+    # Encode tokens
+    tokens = tokenizer.encode(text)
+    print(f"Encoded tokens: {tokens}")
+    print(f"Encoded tokens: {tokens}")
 
-        # Decode text for viewing
-        decoded_text = tokenizer.decode(tokens)
-        logger.info(f"Decoded text: {decoded_text}")
-        print(f"Decoded text: {decoded_text}")
+    # Decode text for viewing
+    decoded_text = tokenizer.decode(tokens)
+    print(f"Decoded text: {decoded_text}")
+    print(f"Decoded text: {decoded_text}")
 
-        # Save output to file if provided
-        if args.output_path:
-            output_dir = os.path.dirname(args.output_path)
-            if not os.path.exists(output_dir):
-                os.makedirs(output_dir)
+    # Save output to file if provided
+    if args.output_path:
+        output_dir = os.path.dirname(args.output_path)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
 
-            with open(args.output_path, 'w') as f:
-                f.write(f"Original text: {text}\n")
-                f.write(f"Encoded tokens: {tokens}\n")
-                f.write(f"Decoded text: {decoded_text}\n")
-            logger.info(f"Output saved to: {args.output_path}")
-
-    except Exception as e:
-        logger.error(f"Error: {e}")
-        print(f"Error: {e}")
+        with open(args.output_path, 'w') as f:
+            f.write(f"Original text: {text}\n")
+            f.write(f"Encoded tokens: {tokens}\n")
+            f.write(f"Decoded text: {decoded_text}\n")
+        print(f"Output saved to: {args.output_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Text encoding and decoding using different tokenizers.")
