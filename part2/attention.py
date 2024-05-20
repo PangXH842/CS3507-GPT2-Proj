@@ -1,57 +1,89 @@
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
 import argparse
 import math
 import os
 
-class ScaledDotProductAttention(torch.nn.Module):
+class ScaledDotProductAttention(nn.Module):
     def __init__(self, d_model):
         super(ScaledDotProductAttention, self).__init__()
         self.scale = 1.0 / math.sqrt(d_model)
 
-    def forward(self, q, k, v, mask=None):
-        scores = torch.matmul(q, k.transpose(1, 2)) * self.scale
-        if mask is not None:
-            scores = scores.masked_fill(mask == 0, -1e9)
-        attention = F.softmax(scores, dim=-1)
-        output = torch.matmul(attention, v)
-        return output, attention
+    def forward(self, hidden_states, layer_past=None, attention_mask=None, head_mask=None, use_cache=False, output_attentions=False):
+        # Unpack hidden states into query, key, and value
+        q, k, v = hidden_states, hidden_states, hidden_states
 
-class MultiHeadAttention(torch.nn.Module):
+        if layer_past is not None:
+            past_key, past_value = layer_past
+            k = torch.cat((past_key, k), dim=-2)
+            v = torch.cat((past_value, v), dim=-2)
+
+        scores = torch.matmul(q, k.transpose(-2, -1)) * self.scale
+        if attention_mask is not None:
+            scores = scores.masked_fill(attention_mask == 0, -1e9)
+        attention = F.softmax(scores, dim=-1)
+        if head_mask is not None:
+            attention = attention * head_mask
+        output = torch.matmul(attention, v)
+
+        if use_cache:
+            present = (k, v)
+        else:
+            present = None
+
+        outputs = (output, present)
+        if output_attentions:
+            outputs += (attention,)
+
+        return outputs
+
+class MultiHeadAttention(nn.Module):
     def __init__(self, d_model, num_heads):
         super(MultiHeadAttention, self).__init__()
         assert d_model % num_heads == 0
         self.d_k = d_model // num_heads
         self.num_heads = num_heads
-        self.linear_q = torch.nn.Linear(d_model, d_model)
-        self.linear_k = torch.nn.Linear(d_model, d_model)
-        self.linear_v = torch.nn.Linear(d_model, d_model)
-        self.linear_out = torch.nn.Linear(d_model, d_model)
+        self.linear_q = nn.Linear(d_model, d_model)
+        self.linear_k = nn.Linear(d_model, d_model)
+        self.linear_v = nn.Linear(d_model, d_model)
+        self.linear_out = nn.Linear(d_model, d_model)
+        self.scaled_dot_product = ScaledDotProductAttention(self.d_k)
 
-    def forward(self, q, k, v, mask=None):
-        batch_size = q.size(0)
-        q = self.linear_q(q).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
-        k = self.linear_k(k).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
-        v = self.linear_v(v).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
+    def forward(self, hidden_states, layer_past=None, attention_mask=None, head_mask=None, use_cache=False, output_attentions=False):
+        batch_size = hidden_states.size(0)
 
-        scaled_dot_product = ScaledDotProductAttention(self.d_k)
-        output, attention = scaled_dot_product(q, k, v, mask)
-        output = output.transpose(1, 2).contiguous().view(batch_size, -1, self.num_heads * self.d_k)
+        q = self.linear_q(hidden_states).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
+        k = self.linear_k(hidden_states).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
+        v = self.linear_v(hidden_states).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
+
+        attn_outputs = self.scaled_dot_product((q, k, v), layer_past, attention_mask, head_mask, use_cache, output_attentions)
+        output = attn_outputs[0].transpose(1, 2).contiguous().view(batch_size, -1, self.num_heads * self.d_k)
         output = self.linear_out(output)
-        return output, attention
 
-class LinearAttention(torch.nn.Module):
+        outputs = (output,) + attn_outputs[1:]
+        return outputs
+
+class LinearAttention(nn.Module):
     def __init__(self, d_model):
         super(LinearAttention, self).__init__()
         self.scale = 1.0 / math.sqrt(d_model)
-        self.linear_q = torch.nn.Linear(d_model, d_model)
-        self.linear_k = torch.nn.Linear(d_model, d_model)
-        self.linear_v = torch.nn.Linear(d_model, d_model)
+        self.linear_q = nn.Linear(d_model, d_model)
+        self.linear_k = nn.Linear(d_model, d_model)
+        self.linear_v = nn.Linear(d_model, d_model)
 
-    def forward(self, q, k, v):
-        q = self.linear_q(q)
-        k = self.linear_k(k)
-        v = self.linear_v(v)
+    def forward(self, hidden_states, layer_past=None, attention_mask=None, head_mask=None, use_cache=False, output_attentions=False):
+        batch_size, seq_len, d_model = hidden_states.size()
+
+        q = self.linear_q(hidden_states)
+        k = self.linear_k(hidden_states)
+        v = self.linear_v(hidden_states)
+
+        if layer_past is not None:
+            past_key, past_value = layer_past
+            k = torch.cat((past_key, k), dim=-2)
+            v = torch.cat((past_value, v), dim=-2)
+
         q = q.softmax(dim=-1)
         k = k.softmax(dim=-2)
         v = v.softmax(dim=-2)
@@ -60,31 +92,44 @@ class LinearAttention(torch.nn.Module):
         attn_weights = torch.einsum("bqd,bkd->bqk", q, k)
         output = torch.einsum("bqk,bkd->bqd", attn_weights, v)
 
-        return output, attn_weights
+        if use_cache:
+            present = (k, v)
+        else:
+            present = None
 
-class NystromAttention(torch.nn.Module):
+        outputs = (output, present)
+        if output_attentions:
+            outputs += (attn_weights,)
+
+        return outputs
+
+class NystromAttention(nn.Module):
     def __init__(self, d_model, num_landmarks):
         super(NystromAttention, self).__init__()
         self.num_landmarks = num_landmarks
         self.scale = 1.0 / math.sqrt(d_model)
-        self.proj_q = torch.nn.Linear(d_model, d_model)
-        self.proj_k = torch.nn.Linear(d_model, d_model)
-        self.proj_v = torch.nn.Linear(d_model, d_model)
+        self.proj_q = nn.Linear(d_model, d_model)
+        self.proj_k = nn.Linear(d_model, d_model)
+        self.proj_v = nn.Linear(d_model, d_model)
 
-    def forward(self, q, k, v):
-        batch_size, seq_len, d_model = q.size()
-        q = self.proj_q(q)
-        k = self.proj_k(k)
-        v = self.proj_v(v)
+    def forward(self, hidden_states, layer_past=None, attention_mask=None, head_mask=None, use_cache=False, output_attentions=False):
+        batch_size, seq_len, d_model = hidden_states.size()
+
+        q = self.proj_q(hidden_states)
+        k = self.proj_k(hidden_states)
+        v = self.proj_v(hidden_states)
+
+        if layer_past is not None:
+            past_key, past_value = layer_past
+            k = torch.cat((past_key, k), dim=-2)
+            v = torch.cat((past_value, v), dim=-2)
 
         k = k.softmax(dim=-1)
         q = q.softmax(dim=-1)
 
-        # Partition sequences into landmarks
         q_landmarks = q.view(batch_size, self.num_landmarks, -1, d_model).mean(dim=-2)
         k_landmarks = k.view(batch_size, self.num_landmarks, -1, d_model).mean(dim=-2)
 
-        # Compute the approximated attention
         kernel_1 = torch.einsum("bqd,bkd->bqk", q, k_landmarks)
         kernel_2 = torch.einsum("bkd,bld->bkl", k_landmarks, k)
         kernel_3 = torch.einsum("bld,bld->bld", k, v)
@@ -92,7 +137,16 @@ class NystromAttention(torch.nn.Module):
         kernel_2_inv = torch.linalg.pinv(kernel_2)
         output = torch.einsum("bqk,bkl,bld->bqd", kernel_1, kernel_2_inv, kernel_3)
 
-        return output, None
+        if use_cache:
+            present = (k, v)
+        else:
+            present = None
+
+        outputs = (output, present)
+        if output_attentions:
+            outputs += (None,)
+
+        return outputs
 
 def get_attention(args):
     if args.attention == "scaled_dot_product":

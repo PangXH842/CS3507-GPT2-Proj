@@ -20,6 +20,7 @@ def generate_text(model, tokenizer, prompt, max_length=50):
         eos_token_id=tokenizer.eos_token_id
     )
     gen_text = tokenizer.batch_decode(gen_tokens, skip_special_tokens=True)[0]
+    
     return gen_text
 
 def calculate_perplexity(model, tokenizer, text):
