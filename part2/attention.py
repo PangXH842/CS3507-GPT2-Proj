@@ -154,16 +154,7 @@ class NystromAttention(torch.nn.Module):
 
         return output, None
 
-def choose_attention(args):
-    """
-    Chooses the attention mechanism based on the provided arguments.
-
-    Args:
-        args (argparse.Namespace): The command-line arguments.
-
-    Returns:
-        torch.nn.Module: The selected attention mechanism module.
-    """
+def get_attention(args):
     if args.attention == "scaled_dot_product":
         attn = scaled_dot_product_attention
     elif args.attention == "multi_head":
@@ -184,7 +175,7 @@ def main(args):
         args (argparse.Namespace): The command-line arguments.
     """
     try:
-        attn = choose_attention(args)
+        attn = get_attention(args)
         logger.info(f"Using attention mechanism: {args.attention}")
 
         # Sample input tensors (batch_size, seq_len, d_model)

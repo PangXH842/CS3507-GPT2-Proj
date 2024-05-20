@@ -78,7 +78,7 @@ class LearnablePositionalEmbedding(torch.nn.Module):
         position_ids = position_ids.unsqueeze(1).expand_as(x[:, :, 0])
         return x + self.position_embeddings(position_ids)
 
-def choose_encoder(args):
+def get_pos_encoder(args):
     """
     Chooses the positional encoding method based on the provided arguments.
 
@@ -104,7 +104,7 @@ def main(args):
         args (argparse.Namespace): The command-line arguments.
     """
     try:
-        pos_encoder = choose_encoder(args)
+        pos_encoder = get_pos_encoder(args)
         logger.info(f"Using encoder: {args.encoder}")
 
         # Sample input tensor (seq_len, batch_size, d_model)

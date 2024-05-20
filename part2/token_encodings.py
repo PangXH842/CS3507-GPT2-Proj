@@ -8,15 +8,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def get_tokenizer(t):
-    """
-    Returns the tokenizer based on the specified type.
-
-    Args:
-    t (str): The type of tokenizer ('bpe', 'wordpiece', 'sentencepiece', 'unigram').
-
-    Returns:
-    tokenizer: The corresponding tokenizer object.
-    """
     match t:
         case "bpe":
             tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
@@ -31,12 +22,6 @@ def get_tokenizer(t):
     return tokenizer
 
 def main(args):
-    """
-    Main function to encode and decode text using the specified tokenizer.
-
-    Args:
-    args: Command-line arguments.
-    """
     try:
         tokenizer = get_tokenizer(args.tokenizer)
         logger.info(f"Using tokenizer: {args.tokenizer}")

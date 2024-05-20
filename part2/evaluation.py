@@ -6,36 +6,13 @@ from nltk.translate.bleu_score import sentence_bleu
 import logging
 import os
 
-from attention import choose_attention
-from positionals import choose_encoder
+from attention import get_attention
+from positionals import get_pos_encoder
 from token_encodings import get_tokenizer
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-# Define custom functions for different attention mechanisms
-def get_attention(attention_type, config):
-    if attention_type == "scaled_dot_product":
-        from transformers.models.gpt2.modeling_gpt2 import GPT2Attention
-        return GPT2Attention(config)
-    elif attention_type == "multi_head":
-        class CustomMultiHeadAttention(GPT2Attention):
-            def __init__(self, config):
-                super().__init__(config)
-                self.num_heads = config.n_head
-
-            def forward(self, hidden_states, layer_past=None, attention_mask=None, head_mask=None, use_cache=False, output_attentions=False):
-                return super().forward(hidden_states, layer_past, attention_mask, head_mask, use_cache, output_attentions)
-        return CustomMultiHeadAttention(config)
-    elif attention_type == "linear":
-        from custom_attention import LinearAttention
-        return LinearAttention(config.n_embd)
-    elif attention_type == "nystrom":
-        from custom_attention import NystromAttention
-        return NystromAttention(config.n_embd, config.num_landmarks)
-    else:
-        raise ValueError(f"Unknown attention type: {attention_type}")
 
 # Define custom positional encodings
 class SinusoidalPositionalEncoding(torch.nn.Module):
