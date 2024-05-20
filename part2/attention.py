@@ -57,7 +57,8 @@ class MultiHeadAttention(nn.Module):
         k = self.linear_k(hidden_states).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
         v = self.linear_v(hidden_states).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
 
-        attn_outputs = self.scaled_dot_product((q, k, v), layer_past, attention_mask, head_mask, use_cache, output_attentions)
+        attn_outputs = self.scaled_dot_product(q, k, v, layer_past, attention_mask, head_mask, use_cache, output_attentions)
+
         output = attn_outputs[0].transpose(1, 2).contiguous().view(batch_size, -1, self.num_heads * self.d_k)
         output = self.linear_out(output)
 

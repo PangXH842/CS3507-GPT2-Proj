@@ -47,6 +47,9 @@ if __name__ == "__main__":
     parser.add_argument('--batch_size', type=int, default=32, help="Batch size for positional encoder.")
     parser.add_argument('--max_len', type=int, default=1000, help="Maximum length for positional encodings")
     parser.add_argument('--d_model', type=int, default=768, help="Model dimension size")
+    # Multi head attention exclusive
+    parser.add_argument('--num_heads', type=int, default=8, help="Number of attention heads (for multi-head attention).")
+    # Nystrom attention exclusive
     parser.add_argument('--num_landmarks', type=int, default=10, help="Number of landmarks (for Nyström attention).")
     args = parser.parse_args()
 
