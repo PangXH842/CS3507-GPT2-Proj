@@ -9,37 +9,21 @@ import os
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def scaled_dot_product_attention(q, k, v, mask=None):
-    """
-    Calculate the attention weights and apply them to the values.
+class ScaledDotProductAttention(torch.nn.Module):
+    def __init__(self, d_model):
+        super(ScaledDotProductAttention, self).__init__()
+        self.scale = 1.0 / math.sqrt(d_model)
 
-    Args:
-        q (torch.Tensor): Query tensor.
-        k (torch.Tensor): Key tensor.
-        v (torch.Tensor): Value tensor.
-        mask (torch.Tensor, optional): Masking tensor.
-
-    Returns:
-        torch.Tensor: Output tensor after applying attention.
-        torch.Tensor: Attention weights.
-    """
-    d_k = q.size(-1)
-    scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(d_k)
-    if mask is not None:
-        scores = scores.masked_fill(mask == 0, -1e9)
-    attention = F.softmax(scores, dim=-1)
-    output = torch.matmul(attention, v)
-    return output, attention
+    def forward(self, q, k, v, mask=None):
+        scores = torch.matmul(q, k.transpose(1, 2)) * self.scale
+        if mask is not None:
+            scores = scores.masked_fill(mask == 0, -1e9)
+        attention = F.softmax(scores, dim=-1)
+        output = torch.matmul(attention, v)
+        return output, attention
 
 class MultiHeadAttention(torch.nn.Module):
     def __init__(self, d_model, num_heads):
-        """
-        Multi-Head Attention module.
-
-        Args:
-            d_model (int): The dimension of the model.
-            num_heads (int): The number of attention heads.
-        """
         super(MultiHeadAttention, self).__init__()
         assert d_model % num_heads == 0
         self.d_k = d_model // num_heads
@@ -50,70 +34,41 @@ class MultiHeadAttention(torch.nn.Module):
         self.linear_out = torch.nn.Linear(d_model, d_model)
 
     def forward(self, q, k, v, mask=None):
-        """
-        Forward pass for the multi-head attention mechanism.
-
-        Args:
-            q (torch.Tensor): Query tensor.
-            k (torch.Tensor): Key tensor.
-            v (torch.Tensor): Value tensor.
-            mask (torch.Tensor, optional): Masking tensor.
-
-        Returns:
-            torch.Tensor: Output tensor after applying multi-head attention.
-            torch.Tensor: Attention weights.
-        """
         batch_size = q.size(0)
         q = self.linear_q(q).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
         k = self.linear_k(k).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
         v = self.linear_v(v).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
 
-        output, attention = scaled_dot_product_attention(q, k, v, mask)
+        scaled_dot_product = ScaledDotProductAttention(self.d_k)
+        output, attention = scaled_dot_product(q, k, v, mask)
         output = output.transpose(1, 2).contiguous().view(batch_size, -1, self.num_heads * self.d_k)
         output = self.linear_out(output)
         return output, attention
 
 class LinearAttention(torch.nn.Module):
     def __init__(self, d_model):
-        """
-        Linear Attention module.
-
-        Args:
-            d_model (int): The dimension of the model.
-        """
         super(LinearAttention, self).__init__()
         self.scale = 1.0 / math.sqrt(d_model)
+        self.linear_q = torch.nn.Linear(d_model, d_model)
+        self.linear_k = torch.nn.Linear(d_model, d_model)
+        self.linear_v = torch.nn.Linear(d_model, d_model)
 
     def forward(self, q, k, v):
-        """
-        Forward pass for the linear attention mechanism.
-
-        Args:
-            q (torch.Tensor): Query tensor.
-            k (torch.Tensor): Key tensor.
-            v (torch.Tensor): Value tensor.
-
-        Returns:
-            torch.Tensor: Output tensor after applying linear attention.
-            torch.Tensor: Attention weights.
-        """
-        k = k.softmax(dim=-2)
+        q = self.linear_q(q)
+        k = self.linear_k(k)
+        v = self.linear_v(v)
         q = q.softmax(dim=-1)
+        k = k.softmax(dim=-2)
         v = v.softmax(dim=-2)
         k = k * self.scale
+
         attn_weights = torch.einsum("bqd,bkd->bqk", q, k)
         output = torch.einsum("bqk,bkd->bqd", attn_weights, v)
+
         return output, attn_weights
 
 class NystromAttention(torch.nn.Module):
     def __init__(self, d_model, num_landmarks):
-        """
-        Nyström Attention module.
-
-        Args:
-            d_model (int): The dimension of the model.
-            num_landmarks (int): The number of landmarks for Nyström approximation.
-        """
         super(NystromAttention, self).__init__()
         self.num_landmarks = num_landmarks
         self.scale = 1.0 / math.sqrt(d_model)
@@ -122,18 +77,6 @@ class NystromAttention(torch.nn.Module):
         self.proj_v = torch.nn.Linear(d_model, d_model)
 
     def forward(self, q, k, v):
-        """
-        Forward pass for the Nyström attention mechanism.
-
-        Args:
-            q (torch.Tensor): Query tensor.
-            k (torch.Tensor): Key tensor.
-            v (torch.Tensor): Value tensor.
-
-        Returns:
-            torch.Tensor: Output tensor after applying Nyström attention.
-            torch.Tensor: Attention weights (None for Nyström attention).
-        """
         batch_size, seq_len, d_model = q.size()
         q = self.proj_q(q)
         k = self.proj_k(k)
@@ -142,9 +85,11 @@ class NystromAttention(torch.nn.Module):
         k = k.softmax(dim=-1)
         q = q.softmax(dim=-1)
 
+        # Partition sequences into landmarks
         q_landmarks = q.view(batch_size, self.num_landmarks, -1, d_model).mean(dim=-2)
         k_landmarks = k.view(batch_size, self.num_landmarks, -1, d_model).mean(dim=-2)
 
+        # Compute the approximated attention
         kernel_1 = torch.einsum("bqd,bkd->bqk", q, k_landmarks)
         kernel_2 = torch.einsum("bkd,bld->bkl", k_landmarks, k)
         kernel_3 = torch.einsum("bld,bld->bld", k, v)
@@ -156,7 +101,7 @@ class NystromAttention(torch.nn.Module):
 
 def get_attention(args):
     if args.attention == "scaled_dot_product":
-        attn = scaled_dot_product_attention
+        attn = ScaledDotProductAttention(args.d_model)
     elif args.attention == "multi_head":
         attn = MultiHeadAttention(args.d_model, args.num_heads)
     elif args.attention == "linear":
@@ -168,12 +113,6 @@ def get_attention(args):
     return attn
 
 def main(args):
-    """
-    Main function to apply the selected attention mechanism to sample input tensors.
-
-    Args:
-        args (argparse.Namespace): The command-line arguments.
-    """
     try:
         attn = get_attention(args)
         logger.info(f"Using attention mechanism: {args.attention}")

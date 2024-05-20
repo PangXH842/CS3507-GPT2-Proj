@@ -10,13 +10,6 @@ logger = logging.getLogger(__name__)
 
 class SinusoidalPositionalEncoding(torch.nn.Module):
     def __init__(self, d_model, max_len=5000):
-        """
-        Sinusoidal Positional Encoding module.
-
-        Args:
-            d_model (int): The dimension of the model.
-            max_len (int): The maximum length of the sequences to be encoded.
-        """
         super(SinusoidalPositionalEncoding, self).__init__()
         
         # Create a matrix of shape (max_len, d_model) to store the positional encodings
@@ -38,39 +31,14 @@ class SinusoidalPositionalEncoding(torch.nn.Module):
         self.register_buffer('pe', pe)
 
     def forward(self, x):
-        """
-        Adds positional encoding to the input tensor.
-
-        Args:
-            x (torch.Tensor): The input tensor.
-
-        Returns:
-            torch.Tensor: The tensor with positional encoding added.
-        """
         return x + self.pe[:x.size(0), :]
 
 class LearnablePositionalEmbedding(torch.nn.Module):
     def __init__(self, max_len, d_model):
-        """
-        Learnable Positional Embedding module.
-
-        Args:
-            max_len (int): The maximum length of the sequences to be encoded.
-            d_model (int): The dimension of the model.
-        """
         super(LearnablePositionalEmbedding, self).__init__()
         self.position_embeddings = torch.nn.Embedding(max_len, d_model)
 
     def forward(self, x):
-        """
-        Adds learnable positional embeddings to the input tensor.
-
-        Args:
-            x (torch.Tensor): The input tensor.
-
-        Returns:
-            torch.Tensor: The tensor with positional embeddings added.
-        """
         seq_len = x.size(0)
         if seq_len > self.position_embeddings.num_embeddings:
             raise ValueError(f"Sequence length {seq_len} is greater than max_len {self.position_embeddings.num_embeddings}")
@@ -79,15 +47,6 @@ class LearnablePositionalEmbedding(torch.nn.Module):
         return x + self.position_embeddings(position_ids)
 
 def get_pos_encoder(args):
-    """
-    Chooses the positional encoding method based on the provided arguments.
-
-    Args:
-        args (argparse.Namespace): The command-line arguments.
-
-    Returns:
-        torch.nn.Module: The selected positional encoding module.
-    """
     if args.encoder == "spe":
         pos_encoder = SinusoidalPositionalEncoding(args.d_model, args.max_len)
     elif args.encoder == "lpe":
@@ -97,12 +56,6 @@ def get_pos_encoder(args):
     return pos_encoder
 
 def main(args):
-    """
-    Main function to apply positional encoding to a sample input tensor.
-
-    Args:
-        args (argparse.Namespace): The command-line arguments.
-    """
     try:
         pos_encoder = get_pos_encoder(args)
         logger.info(f"Using encoder: {args.encoder}")

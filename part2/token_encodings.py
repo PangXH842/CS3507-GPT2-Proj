@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 def get_tokenizer(t):
     match t:
-        case "bpe":
+        case "bpe":         # Byte Pair Encoding
             tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
         case "wordpiece":
             tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
@@ -19,6 +19,7 @@ def get_tokenizer(t):
             tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
         case _:
             raise ValueError(f"Unknown tokenizer type: {t}")
+    tokenizer.pad_token = tokenizer.eos_token
     return tokenizer
 
 def main(args):

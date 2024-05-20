@@ -1,7 +1,7 @@
 import torch
 import argparse
 import pandas as pd
-from transformers import GPT2LMHeadModel, GPT2Tokenizer, GPT2Config
+from transformers import GPT2LMHeadModel, GPT2Config
 from nltk.translate.bleu_score import sentence_bleu
 import logging
 import os
@@ -13,32 +13,6 @@ from token_encodings import get_tokenizer
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-# Define custom positional encodings
-class SinusoidalPositionalEncoding(torch.nn.Module):
-    def __init__(self, d_model, max_len=5000):
-        super(SinusoidalPositionalEncoding, self).__init__()
-        pe = torch.zeros(max_len, d_model)
-        position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
-        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
-        pe[:, 0::2] = torch.sin(position * div_term)
-        pe[:, 1::2] = torch.cos(position * div_term)
-        pe = pe.unsqueeze(0).transpose(0, 1)
-        self.register_buffer('pe', pe)
-
-    def forward(self, x):
-        return x + self.pe[:x.size(0), :]
-
-class LearnablePositionalEmbedding(torch.nn.Module):
-    def __init__(self, max_len, d_model):
-        super(LearnablePositionalEmbedding, self).__init__()
-        self.position_embeddings = torch.nn.Embedding(max_len, d_model)
-
-    def forward(self, x):
-        seq_len = x.size(0)
-        position_ids = torch.arange(seq_len, dtype=torch.long, device=x.device)
-        position_ids = position_ids.unsqueeze(1).expand_as(x[:, :, 0])
-        return x + self.position_embeddings(position_ids)
 
 def generate_text(model, tokenizer, prompt, max_length=50):
     input_ids = tokenizer(prompt, return_tensors="pt").input_ids
@@ -74,12 +48,13 @@ if __name__ == "__main__":
     parser.add_argument('--tokenizer_type', type=str, choices=['gpt2', 'bert', 'albert', 'xlnet'], default='gpt2', help="Type of tokenizer to use")
     parser.add_argument('--attention_type', type=str, choices=['scaled_dot_product', 'multi_head', 'linear', 'nystrom'], default='scaled_dot_product', help="Type of attention mechanism to use")
     parser.add_argument('--positional_encoding', type=str, choices=['sinusoidal', 'learnable'], default='sinusoidal', help="Type of positional encoding to use")
+    parser.add_argument('--max_len', type=int, default=5000, help="Maximum length for positional encodings")
+    parser.add_argument('--d_model', type=int, default=768, help="Model dimension size")
     args = parser.parse_args()
 
     try:
         # Load tokenizer
         tokenizer = get_tokenizer(args.tokenizer_type)
-        tokenizer.pad_token = tokenizer.eos_token
 
         # Load model configuration
         config = GPT2Config.from_pretrained(args.model_path)
@@ -94,10 +69,7 @@ if __name__ == "__main__":
                 layer.attn = get_attention(args.attention_type, config)
 
         # Add custom positional encoding if required
-        if args.positional_encoding == 'sinusoidal':
-            positional_encoding = SinusoidalPositionalEncoding(config.n_embd)
-        elif args.positional_encoding == 'learnable':
-            positional_encoding = LearnablePositionalEmbedding(5000, config.n_embd)
+        positional_encoding = get_pos_encoder(args)
 
         for layer in model.transformer.h:
             layer.attn.register_buffer('positional_encoding', positional_encoding(torch.zeros(1, 1, config.n_embd)))
