@@ -47,8 +47,8 @@ if __name__ == "__main__":
     parser.add_argument('--eval_file', type=str, default="./evaluation/evaluation_texts.csv", help="Path to the evaluation CSV file")
     parser.add_argument('--tokenizer', type=str, choices=['bpe', 'wordpiece', 'sentencepiece', 'unigram'], default='bpe', help="Type of tokenizer to use.")
     parser.add_argument('--attention', type=str, choices=['scaled_dot_product', 'multi_head', 'linear', 'nystrom'], default='scaled_dot_product', help="Type of attention mechanism to use.")
-    parser.add_argument('--positional_encoding', type=str, choices=['sinusoidal', 'learnable'], default='sinusoidal', help="Type of positional encoding to use")
-    parser.add_argument('--max_len', type=int, default=5000, help="Maximum length for positional encodings")
+    parser.add_argument('--positional', type=str, choices=['spe', 'lpe'], default='spe', help="Type of positional encoding to use.")
+    parser.add_argument('--max_len', type=int, default=1000, help="Maximum length for positional encodings")
     parser.add_argument('--d_model', type=int, default=768, help="Model dimension size")
     args = parser.parse_args()
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
         tokenizer = get_tokenizer(args.tokenizer)
 
         # Load positional encoder
-        positional_encoding = get_pos_encoder(args)
+        positional_encoding = get_pos_encoder(args.positional)
 
         # Load attention mechanism
         attention = get_attention(args.attention, config)
