@@ -20,7 +20,7 @@ def generate_text(model, tokenizer, prompt, max_length=50):
         eos_token_id=tokenizer.eos_token_id
     )
     gen_text = tokenizer.batch_decode(gen_tokens, skip_special_tokens=True)[0]
-    
+
     return gen_text
 
 def calculate_perplexity(model, tokenizer, text):
@@ -39,7 +39,7 @@ def evaluate_bleu(reference, candidate):
 if __name__ == "__main__":
     # Parse arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_path', type=str, default="./models/wikitext", help="Path to the model directory")
+    parser.add_argument('--model_path', type=str, default="./models/gpt2", help="Path to the model directory")
     parser.add_argument('--eval_file', type=str, default="./evaluation/evaluation_texts.csv", help="Path to the evaluation CSV file")
     parser.add_argument('--tokenizer', type=str, choices=['bpe', 'wordpiece', 'sentencepiece', 'unigram'], default='bpe', help="Type of tokenizer to use.")
     parser.add_argument('--attention', type=str, choices=['scaled_dot_product', 'multi_head', 'linear', 'nystrom'], default='scaled_dot_product', help="Type of attention mechanism to use.")
