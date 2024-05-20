@@ -3,6 +3,7 @@ import torch.nn.functional as F
 import argparse
 import logging
 import math
+import os
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -200,6 +201,17 @@ def main(args):
         logger.info(f"Output tensor shape: {output.shape}")
         print(output.shape)
 
+        # Save output to a file if output path is provided
+        if args.output_path:
+            output_dir = os.path.dirname(args.output_path)
+            if not os.path.exists(output_dir):
+                os.makedirs(output_dir)
+            
+            with open(args.output_path, 'w') as f:
+                f.write(f"Output tensor shape: {output.shape}\n")
+                f.write(f"Output tensor: {output}\n")
+            logger.info(f"Output saved to: {args.output_path}")
+
     except Exception as e:
         logger.error(f"Error: {e}")
         print(f"Error: {e}")
@@ -210,6 +222,7 @@ if __name__ == "__main__":
     parser.add_argument('--d_model', type=int, default=512, help="Dimension of the model.")
     parser.add_argument('--num_heads', type=int, default=8, help="Number of attention heads (for multi-head attention).")
     parser.add_argument('--num_landmarks', type=int, default=10, help="Number of landmarks (for Nyström attention).")
+    parser.add_argument('--output_path', type=str, default=None, help="Path to save the encoded and decoded output.")
     args = parser.parse_args()
 
     main(args)

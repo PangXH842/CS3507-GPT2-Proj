@@ -2,6 +2,7 @@ import torch
 import math
 import argparse
 import logging
+import os
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -71,6 +72,8 @@ class LearnablePositionalEmbedding(torch.nn.Module):
             torch.Tensor: The tensor with positional embeddings added.
         """
         seq_len = x.size(0)
+        if seq_len > self.position_embeddings.num_embeddings:
+            raise ValueError(f"Sequence length {seq_len} is greater than max_len {self.position_embeddings.num_embeddings}")
         position_ids = torch.arange(seq_len, dtype=torch.long, device=x.device)
         position_ids = position_ids.unsqueeze(1).expand_as(x[:, :, 0])
         return x + self.position_embeddings(position_ids)
@@ -88,7 +91,7 @@ def choose_encoder(args):
     if args.encoder == "spe":
         pos_encoder = SinusoidalPositionalEncoding(args.d_model, args.max_len)
     elif args.encoder == "lpe":
-        pos_encoder = LearnablePositionalEmbedding(args.d_model, args.max_len)
+        pos_encoder = LearnablePositionalEmbedding(args.max_len, args.d_model)
     else:
         raise ValueError(f"Unknown encoder type: {args.encoder}")
     return pos_encoder
@@ -105,10 +108,25 @@ def main(args):
         logger.info(f"Using encoder: {args.encoder}")
 
         # Sample input tensor (seq_len, batch_size, d_model)
-        input_tensor = torch.zeros(50, 32, args.d_model)
+        seq_len = 50
+        batch_size = 32
+        input_tensor = torch.zeros(seq_len, batch_size, args.d_model)
+        
         output_tensor = pos_encoder(input_tensor)
         logger.info(f"Output tensor shape: {output_tensor.shape}")
+        print(output_tensor)
         print(output_tensor.shape)  # Should print torch.Size([50, 32, 512])
+
+        # Save output to a file if output path is provided
+        if args.output_path:
+            output_dir = os.path.dirname(args.output_path)
+            if not os.path.exists(output_dir):
+                os.makedirs(output_dir)
+            
+            with open(args.output_path, 'w') as f:
+                f.write(f"Output tensor shape: {output_tensor.shape}\n")
+                f.write(f"Output tensor: {output_tensor}\n")
+            logger.info(f"Output saved to: {args.output_path}")
 
     except Exception as e:
         logger.error(f"Error: {e}")
@@ -119,6 +137,7 @@ if __name__ == "__main__":
     parser.add_argument('--encoder', type=str, choices=['spe', 'lpe'], default='spe', help="Type of positional encoding to use.")
     parser.add_argument('--d_model', type=int, default=512, help="Dimension of the model.")
     parser.add_argument('--max_len', type=int, default=5000, help="Maximum length of the sequences to be encoded.")
+    parser.add_argument('--output_path', type=str, default=None, help="Path to save the encoded and decoded output.")
     args = parser.parse_args()
 
     main(args)
