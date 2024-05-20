@@ -45,17 +45,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_path', type=str, default="./models/wikitext", help="Path to the model directory")
     parser.add_argument('--eval_file', type=str, default="./evaluation/evaluation_texts.csv", help="Path to the evaluation CSV file")
-    parser.add_argument('--tokenizer_type', type=str, choices=['gpt2', 'bert', 'albert', 'xlnet'], default='gpt2', help="Type of tokenizer to use")
-    parser.add_argument('--attention_type', type=str, choices=['scaled_dot_product', 'multi_head', 'linear', 'nystrom'], default='scaled_dot_product', help="Type of attention mechanism to use")
+    parser.add_argument('--tokenizer', type=str, choices=['bpe', 'wordpiece', 'sentencepiece', 'unigram'], default='bpe', help="Type of tokenizer to use.")
+    parser.add_argument('--attention', type=str, choices=['scaled_dot_product', 'multi_head', 'linear', 'nystrom'], default='scaled_dot_product', help="Type of attention mechanism to use.")
     parser.add_argument('--positional_encoding', type=str, choices=['sinusoidal', 'learnable'], default='sinusoidal', help="Type of positional encoding to use")
     parser.add_argument('--max_len', type=int, default=5000, help="Maximum length for positional encodings")
     parser.add_argument('--d_model', type=int, default=768, help="Model dimension size")
     args = parser.parse_args()
 
     try:
-        # Load tokenizer
-        tokenizer = get_tokenizer(args.tokenizer_type)
-
         # Load model configuration
         config = GPT2Config.from_pretrained(args.model_path)
         config.num_landmarks = 10  # Set number of landmarks for Nystrom attention
@@ -63,15 +60,18 @@ if __name__ == "__main__":
         # Load model
         model = GPT2LMHeadModel.from_pretrained(args.model_path, config=config)
 
-        # Modify the model's attention mechanism
-        if args.attention_type != "scaled_dot_product":
-            for layer in model.transformer.h:
-                layer.attn = get_attention(args.attention_type, config)
+        # Load tokenizer
+        tokenizer = get_tokenizer(args.tokenizer)
 
-        # Add custom positional encoding if required
+        # Load positional encoder
         positional_encoding = get_pos_encoder(args)
 
+        # Load attention mechanism
+        attention = get_attention(args.attention, config)
+
+        # Apply for each layer
         for layer in model.transformer.h:
+            layer.attn = attention
             layer.attn.register_buffer('positional_encoding', positional_encoding(torch.zeros(1, 1, config.n_embd)))
 
     except Exception as e:

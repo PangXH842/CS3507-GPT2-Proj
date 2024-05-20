@@ -114,24 +114,23 @@ def get_attention(args):
 
 def main(args):
     try:
+        # Get attention method
         attn = get_attention(args)
         logger.info(f"Using attention mechanism: {args.attention}")
 
-        # Sample input tensors (batch_size, seq_len, d_model)
+        # Set input tensors (batch_size, seq_len, d_model)
         q = torch.rand(32, 50, args.d_model)
         k = torch.rand(32, 50, args.d_model)
         v = torch.rand(32, 50, args.d_model)
-        mask = None  # Example does not use a mask
+        mask = None  
 
-        if args.attention == "scaled_dot_product":
-            output, attention_weights = attn(q, k, v, mask)
-        else:
-            output, attention_weights = attn(q, k, v)
+        # Generate attention vectors
+        output, attention_weights = attn(q, k, v)
 
         logger.info(f"Output tensor shape: {output.shape}")
         print(output.shape)
 
-        # Save output to a file if output path is provided
+        # Save output to file if provided
         if args.output_path:
             output_dir = os.path.dirname(args.output_path)
             if not os.path.exists(output_dir):

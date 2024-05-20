@@ -24,10 +24,11 @@ def get_tokenizer(t):
 
 def main(args):
     try:
+        # Get tokenizer
         tokenizer = get_tokenizer(args.tokenizer)
         logger.info(f"Using tokenizer: {args.tokenizer}")
 
-        # Read text from file if path is provided, else use the provided text
+        # Read text from file if path is provided, else use provided text
         if args.text_path:
             if not os.path.exists(args.text_path):
                 raise FileNotFoundError(f"Text file not found: {args.text_path}")
@@ -36,20 +37,21 @@ def main(args):
         else:
             text = args.text
 
+        # Print text from input
         logger.info(f"Text to encode: {text}")
+        print(f"Original text: {text}")
 
+        # Encode tokens
         tokens = tokenizer.encode(text)
         logger.info(f"Encoded tokens: {tokens}")
+        print(f"Encoded tokens: {tokens}")
 
+        # Decode text for viewing
         decoded_text = tokenizer.decode(tokens)
         logger.info(f"Decoded text: {decoded_text}")
-
-        # Print output to console
-        print(f"Original text: {text}")
-        print(f"Encoded tokens: {tokens}")
         print(f"Decoded text: {decoded_text}")
 
-        # Save tokenized output to a file if output path is provided
+        # Save output to file if provided
         if args.output_path:
             output_dir = os.path.dirname(args.output_path)
             if not os.path.exists(output_dir):
