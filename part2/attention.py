@@ -4,15 +4,19 @@ import torch.nn.functional as F
 import argparse
 import math
 import os
+from einops import rearrange, reduce
 
 class ScaledDotProductAttention(nn.Module):
     def __init__(self, d_model):
         super(ScaledDotProductAttention, self).__init__()
         self.scale = 1.0 / math.sqrt(d_model)
 
-    def forward(self, hidden_states, layer_past=None, attention_mask=None, head_mask=None, use_cache=False, output_attentions=False):
+    def forward(self, hidden_states, qkv=None, layer_past=None, attention_mask=None, head_mask=None, use_cache=False, output_attentions=False):
         # Unpack hidden states into query, key, and value
-        q, k, v = hidden_states, hidden_states, hidden_states
+        if hidden_states != None:
+            q, k, v = hidden_states, hidden_states, hidden_states
+        else:
+            q, k, v = qkv
 
         if layer_past is not None:
             past_key, past_value = layer_past
@@ -57,7 +61,7 @@ class MultiHeadAttention(nn.Module):
         k = self.linear_k(hidden_states).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
         v = self.linear_v(hidden_states).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
 
-        attn_outputs = self.scaled_dot_product(q, k, v, layer_past, attention_mask, head_mask, use_cache, output_attentions)
+        attn_outputs = self.scaled_dot_product(None, (q, k, v), layer_past, attention_mask, head_mask, use_cache, output_attentions)
 
         output = attn_outputs[0].transpose(1, 2).contiguous().view(batch_size, -1, self.num_heads * self.d_k)
         output = self.linear_out(output)
@@ -105,45 +109,105 @@ class LinearAttention(nn.Module):
         return outputs
 
 class NystromAttention(nn.Module):
-    def __init__(self, d_model, num_landmarks):
+    def __init__(self, d_model, num_landmarks, heads=1, pinv_iterations=6, eps=1e-8, residual=False):
         super(NystromAttention, self).__init__()
         self.num_landmarks = num_landmarks
-        self.scale = 1.0 / math.sqrt(d_model)
-        self.proj_q = nn.Linear(d_model, d_model)
-        self.proj_k = nn.Linear(d_model, d_model)
-        self.proj_v = nn.Linear(d_model, d_model)
+        self.heads = heads
+        self.pinv_iterations = pinv_iterations
+        self.eps = eps
+        self.residual = residual
+        self.scale = 1.0 / math.sqrt(d_model // heads)
+        self.to_qkv = nn.Linear(d_model, d_model * 3)
+        self.to_out = nn.Linear(d_model, d_model)
+        if residual:
+            self.res_conv = nn.Conv1d(d_model, d_model, 1, groups=heads)
+
+    def moore_penrose_iter_pinv(self, x, num_iters):
+        I = torch.eye(x.size(-1), device=x.device)
+        K = x
+        V = torch.clone(K)
+        for _ in range(num_iters):
+            V = 0.25 * V @ (13 * I - K @ V @ (15 * I - K @ V @ (7 * I - K @ V)))
+        return V
 
     def forward(self, hidden_states, layer_past=None, attention_mask=None, head_mask=None, use_cache=False, output_attentions=False):
-        batch_size, seq_len, d_model = hidden_states.size()
+        b, n, d_model = hidden_states.shape
+        h, m, iters, eps = self.heads, self.num_landmarks, self.pinv_iterations, self.eps
 
-        q = self.proj_q(hidden_states)
-        k = self.proj_k(hidden_states)
-        v = self.proj_v(hidden_states)
+        # pad so that sequence can be evenly divided into m landmarks
+        remainder = n % m
+        if remainder > 0:
+            padding = m - (n % m)
+            hidden_states = F.pad(hidden_states, (0, 0, 0, padding), value=0)
 
-        if layer_past is not None:
-            past_key, past_value = layer_past
-            k = torch.cat((past_key, k), dim=-2)
-            v = torch.cat((past_value, v), dim=-2)
+            if attention_mask is not None:
+                attention_mask = F.pad(attention_mask, (padding, 0), value=False)
 
-        k = k.softmax(dim=-1)
-        q = q.softmax(dim=-1)
+        # derive query, keys, values
+        q, k, v = self.to_qkv(hidden_states).chunk(3, dim=-1)
+        q, k, v = map(lambda t: rearrange(t, 'b n (h d) -> b h n d', h=h), (q, k, v))
 
-        q_landmarks = q.view(batch_size, self.num_landmarks, -1, d_model).mean(dim=-2)
-        k_landmarks = k.view(batch_size, self.num_landmarks, -1, d_model).mean(dim=-2)
+        # set masked positions to 0 in queries, keys, values
+        if attention_mask is not None:
+            attention_mask = rearrange(attention_mask, 'b n -> b () n')
+            q, k, v = map(lambda t: t * attention_mask[..., None], (q, k, v))
 
-        kernel_1 = torch.einsum("bqd,bkd->bqk", q, k_landmarks)
-        kernel_2 = torch.einsum("bkd,bld->bkl", k_landmarks, k)
-        kernel_3 = torch.einsum("bld,bld->bld", k, v)
+        q = q * self.scale
 
-        kernel_2_inv = torch.linalg.pinv(kernel_2)
-        output = torch.einsum("bqk,bkl,bld->bqd", kernel_1, kernel_2_inv, kernel_3)
+        # generate landmarks by sum reduction, and then calculate mean using the mask
+        l = torch.ceil(n / m)
+        landmark_einops_eq = '... (n l) d -> ... n d'
+        q_landmarks = reduce(q, landmark_einops_eq, 'sum', l=l)
+        k_landmarks = reduce(k, landmark_einops_eq, 'sum', l=l)
+
+        # calculate landmark mask, and also get sum of non-masked elements in preparation for masked mean
+        divisor = l
+        if attention_mask is not None:
+            mask_landmarks_sum = reduce(attention_mask, '... (n l) -> ... n', 'sum', l=l)
+            divisor = mask_landmarks_sum[..., None] + eps
+            mask_landmarks = mask_landmarks_sum > 0
+
+        # masked mean (if mask exists)
+        q_landmarks = q_landmarks / divisor
+        k_landmarks = k_landmarks / divisor
+
+        # similarities
+        einops_eq = '... i d, ... j d -> ... i j'
+        sim1 = torch.einsum(einops_eq, q, k_landmarks)
+        sim2 = torch.einsum(einops_eq, q_landmarks, k_landmarks)
+        sim3 = torch.einsum(einops_eq, q_landmarks, k)
+
+        # masking
+        if attention_mask is not None:
+            mask_value = -torch.finfo(q.dtype).max
+            sim1.masked_fill_(~(attention_mask[..., None] * mask_landmarks[..., None, :]), mask_value)
+            sim2.masked_fill_(~(mask_landmarks[..., None] * mask_landmarks[..., None, :]), mask_value)
+            sim3.masked_fill_(~(mask_landmarks[..., None] * attention_mask[..., None, :]), mask_value)
+
+        # eq (15) in the paper and aggregate values
+        attn1, attn2, attn3 = map(lambda t: t.softmax(dim=-1), (sim1, sim2, sim3))
+        attn2_inv = self.moore_penrose_iter_pinv(attn2, iters)
+
+        out = (attn1 @ attn2_inv) @ (attn3 @ v)
+
+        # add depth-wise conv residual of values
+        if self.residual:
+            v_reshaped = v.permute(0, 2, 1).contiguous()
+            out = out + self.res_conv(v_reshaped).permute(0, 2, 1).contiguous()
+
+        # merge and combine heads
+        out = rearrange(out, 'b h n d -> b n (h d)', h=h)
+        out = self.to_out(out)
+        out = out[:, -n:]
 
         if use_cache:
             present = (k, v)
         else:
             present = None
 
-        outputs = (output, present)
+        outputs = (out,)
+        if present is not None:
+            outputs += (present,)
         if output_attentions:
             outputs += (None,)
 

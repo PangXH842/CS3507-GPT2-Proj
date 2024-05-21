@@ -50,7 +50,7 @@ if __name__ == "__main__":
     # Multi head attention exclusive
     parser.add_argument('--num_heads', type=int, default=8, help="Number of attention heads (for multi-head attention).")
     # Nystrom attention exclusive
-    parser.add_argument('--num_landmarks', type=int, default=10, help="Number of landmarks (for Nyström attention).")
+    parser.add_argument('--num_landmarks', type=int, default=6, help="Number of landmarks (for Nyström attention).")
     args = parser.parse_args()
 
     # Load model configuration
