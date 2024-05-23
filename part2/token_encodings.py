@@ -3,18 +3,17 @@ from transformers import GPT2Tokenizer, BertTokenizer, AlbertTokenizer, XLNetTok
 import os
 
 def get_tokenizer(args):
-    match args.tokenizer:
-        case "bpe":         # Byte Pair Encoding
-            tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-            tokenizer.pad_token = tokenizer.eos_token
-        case "wordpiece":
-            tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        case "sentencepiece":
-            tokenizer = AlbertTokenizer.from_pretrained('albert-base-v2')
-        case "unigram":
-            tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
-        case _:
-            raise ValueError(f"Unknown tokenizer type: {args.tokenizer}")
+    if args.tokenizer == "bpe":         # Byte Pair Encoding
+        tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+        tokenizer.pad_token = tokenizer.eos_token
+    elif args.tokenizer == "wordpiece":
+        tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+    elif args.tokenizer == "sentencepiece":
+        tokenizer = AlbertTokenizer.from_pretrained('albert-base-v2')
+    elif args.tokenizer == "unigram":
+        tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
+    else:
+        raise ValueError(f"Unknown tokenizer type: {args.tokenizer}")
     return tokenizer
 
 def main(args):
