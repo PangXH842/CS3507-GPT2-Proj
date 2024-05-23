@@ -6,6 +6,7 @@ def get_tokenizer(args):
     match args.tokenizer:
         case "bpe":         # Byte Pair Encoding
             tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+            tokenizer.pad_token = tokenizer.eos_token
         case "wordpiece":
             tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         case "sentencepiece":
@@ -14,7 +15,6 @@ def get_tokenizer(args):
             tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
         case _:
             raise ValueError(f"Unknown tokenizer type: {args.tokenizer}")
-    tokenizer.pad_token = tokenizer.eos_token
     return tokenizer
 
 def main(args):

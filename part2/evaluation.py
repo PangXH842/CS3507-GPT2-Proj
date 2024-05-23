@@ -62,6 +62,13 @@ if __name__ == "__main__":
 
     # Load tokenizer
     tokenizer = get_tokenizer(args)
+    
+    # Get the original and new vocabulary size
+    original_vocab_size = model.config.vocab_size
+    new_vocab_size = len(tokenizer)
+
+    # Resize the token embeddings
+    model.resize_token_embeddings(new_vocab_size)
 
     # Load positional encoder
     positional_encoding = get_pos_encoder(args)

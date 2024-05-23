@@ -1,0 +1,161 @@
+Evaluating prompt 1 of 20: The highest mountain in the world is
+Generated Text: The highest mountain in the world is the best-to be a way, but will never forgotten about the majority of a number of the world-2xis the entire year's not affected by the idea of the old trick or a couple sets of
+Perplexity: 62.29803466796875
+BLEU score: 0.13749229838463398
+
+Evaluating prompt 2 of 20: The author of 'The Origin of Species' is
+Generated Text: The author of 'The Origin of Species' is said, or a massive amounts of the final difference, we could have been done this year, I believe the same article of the entire world-naturally, said it was the main reason that,
+Perplexity: 70.93504333496094
+BLEU score: 0.18014636992642138
+
+Evaluating prompt 3 of 20: The capital of France is
+Generated Text: The capital of France is what might be able to make his mother-the latest.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D
+Perplexity: 679.705322265625
+BLEU score: 0.21530464891161827
+
+Evaluating prompt 4 of 20: The current President of the United States is
+Generated Text: The current President of the United States is still, a two of life of A recent year before a good reason you can't make sure. A little new things.
+Perplexity: 75.49267578125
+BLEU score: 0.23299898819244838
+
+Evaluating prompt 5 of 20: The largest planet in our solar system is
+Generated Text: The largest planet in our solar system is the wholeheartedly: The main source-turned-p. They had been asked to help you've seen a great dealings the last year ago, they are going to ensure there is very good and was once
+Perplexity: 70.33776092529297
+BLEU score: 0.1759046596549957
+
+Evaluating prompt 6 of 20: World War II ended in
+Generated Text: World War II ended in the state's a little way to make it's version?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+On February
+Perplexity: 1513.8033447265625
+BLEU score: 0.23961829057131984
+
+Evaluating prompt 7 of 20: The painter of the Mona Lisa is
+Generated Text: The painter of the Mona Lisa is simply, but with the state of a few different sorts of the United States. But these two hundred words, when I have lost their own person in the new arrivals and are not interested, or otherwise, but
+Perplexity: 79.62225341796875
+BLEU score: 0.14023424042019694
+
+Evaluating prompt 8 of 20: Water boils at
+Generated Text: Water boils at the last day of "The most important of the process of new words and he is that we're the nation's most important time had the nation has been invited to prevent the next month after a few two weeks ago, and it was
+Perplexity: 56.62288284301758
+C:\Users\shota\anaconda3\Lib\site-packages\nltk\translate\bleu_score.py:552: UserWarning:
+The hypothesis contains 0 counts of 4-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+BLEU score: 1.1823684949381238e-78
+
+Evaluating prompt 9 of 20: The capital of Japan is
+Generated Text: The capital of Japan is not necessarily involved. The first of a majorly drawn in Canada, but the majority of the whole life's a single week the same situation of the same month or any changes your name of the country of the way it has
+Perplexity: 53.47015380859375
+BLEU score: 0.08617684067736593
+
+Evaluating prompt 10 of 20: The discoverer of penicillin is
+Generated Text: The discoverer of penicillin is a couple of the same way. After another way that we won't have failed to be considered to the whole three days, or you might well suited for example, or other things that same day in a
+Perplexity: 54.93796157836914
+BLEU score: 0.08175340974854192
+
+Evaluating prompt 11 of 20: The longest river in the world is
+Generated Text: The longest river in the world is going to be asked to be seen a simple of the United States of those countries are not considered the new construction of an hour, and the first year later, and how much of the majority of the same day 1
+Perplexity: 40.656490325927734
+BLEU score: 0.12966301701727728
+
+Evaluating prompt 12 of 20: The tallest building in the world is
+Generated Text: The tallest building in the world is now, it is to stop by a short of the UBA.
+Perplexity: 82.75627136230469
+BLEU score: 0.36615107686578496
+
+Evaluating prompt 13 of 20: The speed of light is
+Generated Text: The speed of light is a more than this, the most interesting for that was the first.
+Perplexity: 113.43990325927734
+BLEU score: 0.23693055763743093
+
+Evaluating prompt 14 of 20: The father of modern physics is
+Generated Text: The father of modern physics is not going with a bit more than the idea of the other parts of a small thing that we're also to be more than this week, it was not wanted to be able to the idea was a few, it was
+Perplexity: 42.834720611572266
+BLEU score: 0.1059786102229136
+
+Evaluating prompt 15 of 20: The capital of Canada is
+Generated Text: The capital of Canada is the next few of the first-of two major difference of a new government of the city of the original production of a couple of the entire day, the big league. We have been getting it's already got all of the
+Perplexity: 56.98114013671875
+BLEU score: 0.0856011448584366
+
+Evaluating prompt 16 of 20: The writer of 'Hamlet' is
+Generated Text: The writer of 'Hamlet' is now let you can be said.
+Perplexity: 161.41091918945312
+BLEU score: 0.29251718341295524
+
+Evaluating prompt 17 of 20: The hardest natural substance on Earth is
+Generated Text: The hardest natural substance on Earth is just the way up at the first place of the same day, and the same day of the same thing about the main board of the country of the same, but does not quite good job when he made an enormous
+Perplexity: 53.33002853393555
+BLEU score: 0.11974032927121092
+
+Evaluating prompt 18 of 20: The smallest country in the world is
+Generated Text: The smallest country in the world is what happens to help that was, it's new developments, the same exact thing.
+Perplexity: 70.81475830078125
+BLEU score: 0.2727483326069468
+
+Evaluating prompt 19 of 20: The main ingredient in guacamole is
+Generated Text: The main ingredient in guacamole is a combination of their families, and they're only half-factory of the first one of its own idea of the other major events, and then. The story, and the way or its own person
+Perplexity: 77.87377166748047
+BLEU score: 0.13203823352287472
+
+Evaluating prompt 20 of 20: The chemical symbol for gold is
+Generated Text: The chemical symbol for gold is not the following a time after the same as it was just an emergency for such a new additions. His story. We have already set a man was not necessarily found that the person is an extremely sensitively moved. There   
+Perplexity: 94.55574798583984
+BLEU score: 0.10521736949996376
+
+Average Perplexity: 175.59395923614503
+Average BLEU score: 0.16681078007016686
