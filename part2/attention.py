@@ -189,12 +189,10 @@ def main(args):
     print(f"Using attention mechanism: {args.attention}")
 
     # Set input tensors (batch_size, seq_len, d_model)
-    q = torch.rand(args.batch_size, args.seq_len, args.d_model)
-    k = torch.rand(args.batch_size, args.seq_len, args.d_model)
-    v = torch.rand(args.batch_size, args.seq_len, args.d_model)
+    h = torch.rand(args.batch_size, args.seq_len, args.d_model)
 
     # Generate attention vectors
-    output, attention_weights = attn(q, k, v)
+    output, attention_weights = attn(h)
 
     print(f"Output tensor shape: {output.shape}")
     print(output.shape)
