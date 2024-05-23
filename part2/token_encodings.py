@@ -19,7 +19,7 @@ def get_tokenizer(args):
 
 def main(args):
     # Get tokenizer
-    tokenizer = get_tokenizer(args.tokenizer)
+    tokenizer = get_tokenizer(args)
     print(f"Using tokenizer: {args.tokenizer}")
 
     # Read text from file if path is provided, else use provided text
@@ -32,17 +32,14 @@ def main(args):
         text = args.text
 
     # Print text from input
-    print(f"Text to encode: {text}")
     print(f"Original text: {text}")
 
     # Encode tokens
     tokens = tokenizer.encode(text)
     print(f"Encoded tokens: {tokens}")
-    print(f"Encoded tokens: {tokens}")
 
     # Decode text for viewing
     decoded_text = tokenizer.decode(tokens)
-    print(f"Decoded text: {decoded_text}")
     print(f"Decoded text: {decoded_text}")
 
     # Save output to file if provided
