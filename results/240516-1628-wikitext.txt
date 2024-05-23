@@ -1,0 +1,102 @@
+Evaluating prompt 1 of 20: The highest mountain in the world is
+Generated Text: The highest mountain in the world is the St. Helena Mountains, which is located on the Missouri River in the North Platte Mountains. It is located on a vast area of rock that is located in the northern part of the Missouri River basin. It
+Perplexity: 8.917030334472656
+BLEU score: 0.1558934055240406
+
+Evaluating prompt 2 of 20: The author of 'The Origin of Species' is
+Generated Text: The author of 'The Origin of Species' is Joseph Shiban. He has been a columnist for the Daily Mail and the Observer since 2001 and has been a reviewer of the National Review. He has also been a publisher of the journal The Review of
+Perplexity: 15.22802734375
+BLEU score: 0.15567149264052613
+
+Evaluating prompt 3 of 20: The capital of France is
+Generated Text: The capital of France is the capital of the French army. There are hundreds of naval and military warships in the French fleet ; they are the only fleet to have been operational since 1775. Their naval fleet consists of six ships and twenty @-@
+Perplexity: 9.442024230957031
+BLEU score: 0.08279070605814123
+
+Evaluating prompt 4 of 20: The current President of the United States is
+Generated Text: The current President of the United States is President Barack Obama. His predecessor, President George W. Bush, was president of the United States from 2005 to 2008. Vice President Mike Pence is in his eighth year as Vice President.
+Perplexity: 10.37983512878418
+BLEU score: 0.19284241191324553
+
+Evaluating prompt 5 of 20: The largest planet in our solar system is
+Generated Text: The largest planet in our solar system is the Sun, which is 7 @,@ 787 kilometres ( 1 @,@ 786 mi ) solar radius from the Earth. The Sun is the most important planet in the Solar System. The Sun is
+Perplexity: 7.718509674072266
+BLEU score: 0.1669907587947069
+
+Evaluating prompt 6 of 20: World War II ended in
+Generated Text: World War II ended in a bitter war between the two countries, with the former taking seven years to complete. Although the conflict lasted just over two decades, the war had a lasting legacy on American public perceptions of politics. The war produced a period of
+Perplexity: 20.879634857177734
+BLEU score: 0.10455350437808132
+
+Evaluating prompt 7 of 20: The painter of the Mona Lisa is
+Generated Text: The painter of the Mona Lisa is an important part of the paintings of the 1960s and 1970s. She is usually seen in the gallery or in the painting rooms of the museum. She is often seen in the rooms of her contemporary colleagues.
+Perplexity: 12.958047866821289
+BLEU score: 0.15069149816765723
+
+Evaluating prompt 8 of 20: Water boils at
+Generated Text: Water boils at 0 ° C ( 2 ° F ) at 30 ° C ( 28 ° F ). The temperature of water in an electrolysis process is approximately 1 ° C ( 0 @.@ 91 ° F ). This is compared to an
+Perplexity: 11.187724113464355
+BLEU score: 1.4727221633416923e-78
+
+Evaluating prompt 9 of 20: The capital of Japan is
+Generated Text: The capital of Japan is the capital of the Japanese Empire. Several other empires also exist. The Japanese Empire is the largest industrial empire in the Western world, with approximately 8 @,@ 000 @,@ 000 workers and 500 @,@ 000 institutions
+Perplexity: 9.873981475830078
+BLEU score: 0.09968499639681352
+
+Evaluating prompt 10 of 20: The discoverer of penicillin is
+Generated Text: The discoverer of penicillin is Dr. Frederick L. Wright.
+Perplexity: 31.74186897277832
+BLEU score: 0.3198048439256343
+
+Evaluating prompt 11 of 20: The longest river in the world is
+Generated Text: The longest river in the world is the Llanfao river, which runs through the village of Llanfao and runs from Caiin to Lehi @-@ Shambang ; this river runs from Amin to Banyong
+Perplexity: 18.132394790649414
+BLEU score: 0.22506782731403724
+
+Evaluating prompt 12 of 20: The tallest building in the world is
+Generated Text: The tallest building in the world is the Tower of the Ruler, which stands at 150 ft ( 47 m ) tall and is the highest building in the world at 150 ft ( 47 m ) tall, according to various accounts. The Tower of the Ruler
+Perplexity: 8.118735313415527
+BLEU score: 0.15241326793273957
+
+Evaluating prompt 13 of 20: The speed of light is
+Generated Text: The speed of light is limited by the gravitational force that is exerted on the surface of a star. This force is made up of the speed of light, its angular mass, and its motion. Because the gravitational force is limited by the distance from the
+Perplexity: 10.428589820861816
+BLEU score: 0.08367629412118824
+
+Evaluating prompt 14 of 20: The father of modern physics is
+Generated Text: The father of modern physics is John F. Kennedy. He was the first to say that the science of neutron stars, which are very dark and very luminous, are the true scientific answers to the question of how big an earth, how far back
+Perplexity: 25.457950592041016
+BLEU score: 0.11649284259158209
+
+Evaluating prompt 15 of 20: The capital of Canada is
+Generated Text: The capital of Canada is the capital of the Canadian United States, and its capital is the municipal and colonial Canadian government of Canada. The city is not a residential city. In 1843 it was incorporated into the Canadian Constitution and became an independent state.
+Perplexity: 15.54724407196045
+BLEU score: 0.0926947735155968
+
+Evaluating prompt 16 of 20: The writer of 'Hamlet' is
+Generated Text: The writer of 'Hamlet' is a historian of the Roman Empire from 1537 to 1637 who wrote a book on Roman empire in the Roman Empire. He also wrote an historical book on Roman Empire in the Roman Empire in 1537.
+Perplexity: 20.63886833190918
+BLEU score: 0.0964121595423039
+
+Evaluating prompt 17 of 20: The hardest natural substance on Earth is
+Generated Text: The hardest natural substance on Earth is hydrochloric acid, which is the only material to achieve the quality of hydrochloric acid in the Earth's atmosphere. The hydrochloric acid makes up about 30 % of the earth's temperature and
+Perplexity: 22.700775146484375
+BLEU score: 0.15713284450781043
+
+Evaluating prompt 18 of 20: The smallest country in the world is
+Generated Text: The smallest country in the world is the United States, where a maximum of two hundred thousand people live in an area of almost thirteen thousand square miles ( 150 million km2 ). In the United Kingdom, a total of six million people live in a
+Perplexity: 10.4570951461792
+BLEU score: 0.13230383779255614
+
+Evaluating prompt 19 of 20: The main ingredient in guacamole is
+Generated Text: The main ingredient in guacamole is corn. The guacamole is produced by producing the corn corn corn as a food for the corn gill, which is kept in the nearby corn warehouses. The corn is kept in a small kitchen
+Perplexity: 15.704042434692383
+BLEU score: 0.13460328046009243
+
+Evaluating prompt 20 of 20: The chemical symbol for gold is
+Generated Text: The chemical symbol for gold is the gold dollar. The gold dollar is a single dollar with an additional dollar dollar on the back. It is a silver dollar with a silver dollar on the back, and a gold dollar on the front. The gold dollar
+Perplexity: 8.142999649047852
+BLEU score: 0.10521736949996376
+
+Average Perplexity: 14.682768964767456
+Average BLEU score: 0.13624690575383586

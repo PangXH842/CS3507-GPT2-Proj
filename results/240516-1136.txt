@@ -1,0 +1,51 @@
+= Original model ========================================
+Which mountain is the highest in the world?
+
+"I went to the top of mountains with my bike. The top is a mountain. That's the highest in the world."
+
+Mountain is the term applied, based on the distance to a point where the ground or the terrain in which the bicycle is placed.
+
+A cyclist who gets on a mountain bike may find that their bike may only be on two or three places at once.
+
+What is it the purpose of a bicycle?
+
+"The first thing that comes to mind at the beginning of my conversation with people is 'Why is it that I can't do something else?' The thing I'm saying is 'There's not a way to do it faster than I do it.' There are three things that you do.
+
+"One is you can do it on a mountain bike. You can mount that bike. You can do the climb. You can do it on a bike, but you have
+= Fine-tuned model ========================================
+Which mountain is the highest in the world?
+==================================================
+Original Model Perplexity: 9.49828052520752
+Fine-tuned Model Perplexity: 144.20504760742188
+C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\nltk\translate\bleu_score.py:552: UserWarning:
+The hypothesis contains 0 counts of 3-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\nltk\translate\bleu_score.py:552: UserWarning:
+The hypothesis contains 0 counts of 4-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+Original Model BLEU score: 1.8314049073358377e-155
+Fine-tuned Model BLEU score: 7.1958300848837144e-155
+(venv) PS D:\PangXH\Homework\2023-2024-2\工科创IV-J\final\gpt4> python .\scripts\evaluation.py
+= Original model ========================================
+The highest mountain in the world is the highest mountain in the world."
+
+There's no shortage of examples to show that this is exactly what a volcano is. The last one in the country was erupted 50 years ago and destroyed much of the country. In the 1980s, the world's first volcano erupted in the Central Peruvian state of Veracruz, causing the death of dozens of people. When the volcano was the last eruption of the volcano, it was only just erupting for a few short minutes.     
+
+Why the volcano in the Central Peruvian state of Veracruz? According to the National Fire Protection Agency, the volcano is located 100 kilometers north of Veracruz, in Bolivia's Andean state of Sonora. It's currently known as the "Little Pueblo Volcano." There's an additional 12 different types of volcanoes in the world.
+
+For the more temperate areas in the world, there are several volcanoes already active.
+= Fine-tuned model ========================================
+The highest mountain in the world is the Sovetsky River. It is the longest flowing river in the world, and the highest, ever seen in the United States. The river is the largest river in the world and the highest in the southern hemisphere ( Canada and the United States ). The river is the largest river in the world and the highest in the northern hemisphere ( Mexico and the United States ). It is the longest and most active river in the United States.
+
+ The river is the highest river in the world and the highest in the northern hemisphere ( Mexico and the United States ).
+==================================================
+Original Model Perplexity: 8.17371940612793
+Fine-tuned Model Perplexity: 6.587316036224365
+Original Model BLEU score: 0.0395884155775416
+Fine-tuned Model BLEU score: 0.05542525018814499

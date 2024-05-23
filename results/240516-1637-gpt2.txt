@@ -1,0 +1,120 @@
+Evaluating prompt 1 of 20: The highest mountain in the world is
+Generated Text: The highest mountain in the world is the Himalaya, the world's highest, which is about 3,100 meters (3,300 feet) higher than the top of Mount Everest. The Mount Everest is believed to be one of the world's most
+Perplexity: 6.500300884246826
+BLEU score: 0.17548433488411244
+
+Evaluating prompt 2 of 20: The author of 'The Origin of Species' is
+Generated Text: The author of 'The Origin of Species' is at the forefront of advancing the scientific field of evolution and has been involved in many major scientific projects around the world since the 1970s. He has been involved for many decades in the field of evolution and
+Perplexity: 8.918865203857422
+BLEU score: 0.1592675376852445
+
+Evaluating prompt 3 of 20: The capital of France is
+Generated Text: The capital of France is one of the most important and economically important countries in the world. The country of 1.5 million inhabitants is known for its unique economic and cultural history, the well-established cultural traditions, and high-quality education. Moreover
+Perplexity: 10.008796691894531
+BLEU score: 0.15794492759384612
+
+Evaluating prompt 4 of 20: The current President of the United States is
+Generated Text: The current President of the United States is known for his commitment to national security, and his presidency has given Trump a chance to prove himself as a leader.
+
+"We're now moving forward in an extremely constructive way to address the issue of climate
+Perplexity: 11.630904197692871
+BLEU score: 0.16317905930437193
+
+Evaluating prompt 5 of 20: The largest planet in our solar system is
+Generated Text: The largest planet in our solar system is probably a dwarf planet (at least by today's standards), which has already been detected in the past.
+
+The dwarf planet is just one of thousands of potentially habitable, and potentially habitable planets, out there
+Perplexity: 10.714672088623047
+BLEU score: 0.1712432882294048
+
+Evaluating prompt 6 of 20: World War II ended in
+Generated Text: World War II ended in a single-player fight at the end of the campaign. It's a long way from the game's initial launch, and the game's multiplayer is largely out-and-out like the original, though there are some glitches
+Perplexity: 13.243230819702148
+BLEU score: 0.11110969989860409
+
+Evaluating prompt 7 of 20: The painter of the Mona Lisa is
+Generated Text: The painter of the Mona Lisa is considered one of the greatest sculptors of all time, and to him is a beautiful piece of art. I would do anything to love his work and be blessed by his creativity.
+Perplexity: 12.933117866516113
+BLEU score: 0.15293885404881336
+
+Evaluating prompt 8 of 20: Water boils at
+Generated Text: Water boils at 4 degrees C. The temperature in the freezer is approximately 1.6 degrees C. to produce ice.
+
+As a frozen item will melt, all of the ice in the refrigerator will freeze. This freezing process is accomplished by pulling
+Perplexity: 15.377004623413086
+BLEU score: 1.4294017372592546e-78
+
+Evaluating prompt 9 of 20: The capital of Japan is
+Generated Text: The capital of Japan is now home to more than 7,000,000 people. Some 7,000 have a strong sense of belonging, while most have a sense of belonging only to their own country of birth.
+
+Moves are already going
+Perplexity: 12.138705253601074
+BLEU score: 0.09868209342887882
+
+Evaluating prompt 10 of 20: The discoverer of penicillin is
+Generated Text: The discoverer of penicillin is currently researching a way to kill HIV by administering it intravenously to patients undergoing chemotherapy.
+
+"There will definitely be some people who are resistant to it because there are few side-effects but then you
+Perplexity: 16.922653198242188
+BLEU score: 0.09241713818460442
+
+Evaluating prompt 11 of 20: The longest river in the world is
+Generated Text: The longest river in the world is the one that runs through the mountains of eastern Turkey. It flows down between the western Turkish mountains and becomes known as the "Hell of the Nile," the bloodiest river in any age.
+
+In the late
+Perplexity: 15.288866996765137
+BLEU score: 0.18352465690507014
+
+Evaluating prompt 12 of 20: The tallest building in the world is
+Generated Text: The tallest building in the world is the tallest tower, the one that comes up every year. It's the tallest building in the world that has been constructed in a single building year. And it is very large. So it's a very large building
+Perplexity: 9.719527244567871
+BLEU score: 0.16317905930437193
+
+Evaluating prompt 13 of 20: The speed of light is
+Generated Text: The speed of light is the same as the speed of light, and so you need to find the right speed, and this is all a matter of trial and error. But in order to get that speed, you have to find them. If you
+Perplexity: 8.84288215637207
+BLEU score: 0.0856011448584366
+
+Evaluating prompt 14 of 20: The father of modern physics is
+Generated Text: The father of modern physics is the Nobel laureate Steven Weinberg and he is regarded as one of the greatest physicists of his generation. He is a major in applied physics and computer technology in the US and has won two European awards.
+
+He is
+Perplexity: 12.88611888885498
+BLEU score: 0.1138130543686042
+
+Evaluating prompt 15 of 20: The capital of Canada is
+Generated Text: The capital of Canada is the only place in the world where a new census takes place. Of these, the United States is the only one to have a complete, official census, in which only two percent of the population is black or Latinx.
+Perplexity: 10.278761863708496
+BLEU score: 0.0847400567745194
+
+Evaluating prompt 16 of 20: The writer of 'Hamlet' is
+Generated Text: The writer of 'Hamlet' is the artist who brought you 'The Dark Tower.' When you are writing for 'Hamlet' you have no idea who you are… If you do, please tell us how much you love your work. You
+Perplexity: 15.283819198608398
+BLEU score: 0.09604819623436828
+
+Evaluating prompt 17 of 20: The hardest natural substance on Earth is
+Generated Text: The hardest natural substance on Earth is made up mostly of atoms."
+
+But the molecules from which scientists built the atoms must be very different from each other, say researchers. They can come from different parts of the galaxy — including the Milky Way —
+Perplexity: 18.89842414855957
+BLEU score: 0.12380098140048579
+
+Evaluating prompt 18 of 20: The smallest country in the world is
+Generated Text: The smallest country in the world is Brazil, with just 735 people, or around 15% of the population.
+
+On an island in the southern island of Nauru, where a huge lake lies to the South Pole, there's no
+Perplexity: 13.881718635559082
+BLEU score: 0.16766524290980256
+
+Evaluating prompt 19 of 20: The main ingredient in guacamole is
+Generated Text: The main ingredient in guacamole is cornstarch, which is also part of the food protein so that its high sugar content and high fructose corn syrup content is also the main ingredients in making guacamole. All of this has caused
+Perplexity: 13.005207061767578
+BLEU score: 0.1286057341226582
+
+Evaluating prompt 20 of 20: The chemical symbol for gold is
+Generated Text: The chemical symbol for gold is in the form of a triangle with two squares. The symbol is a special symbol that may be taken literally and, if used correctly, can be used to signify something beyond the meaning of the symbol. The symbol may be
+Perplexity: 14.838064193725586
+BLEU score: 0.11341510053382856
+
+Average Perplexity: 12.565582060813904
+Average BLEU score: 0.1271330080335013
