@@ -1,9 +1,0 @@
-Original text: Hello, how are you doing today? I hope everything is going well.
-This is a sample text file to demonstrate the tokenization process.
-Feel free to add more sentences to see how the tokenizer handles different text.
-
-Encoded tokens: [15496, 11, 703, 389, 345, 1804, 1909, 30, 314, 2911, 2279, 318, 1016, 880, 13, 198, 1212, 318, 257, 6291, 2420, 2393, 284, 10176, 262, 11241, 1634, 1429, 13, 198, 35114, 1479, 284, 751, 517, 13439, 284, 766, 703, 262, 11241, 7509, 17105, 1180, 2420, 13, 198]
-Decoded text: Hello, how are you doing today? I hope everything is going well.
-This is a sample text file to demonstrate the tokenization process.
-Feel free to add more sentences to see how the tokenizer handles different text.
-
