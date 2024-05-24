@@ -1,0 +1,108 @@
+Evaluating prompt 1 of 20: The highest mountain in the world is
+Generated Text: The highest mountain in the world iss– from step nestries important withoutan About33 health Lord neverville showed news better came hell set agreed dollars War final election set production noticed- major might componentNvi 12force US"dback
+Perplexity: 15838.5068359375
+BLEU score: 0.13009868453084908
+
+Evaluating prompt 2 of 20: The author of 'The Origin of Species' is
+Generated Text: The author of 'The Origin of Species' is captain" A $2 takes areaan transfer exploration Neil from try leader- major side minister hand” De why got earlier face set list takes news better came dipping show coursean gold 6 type
+Perplexity: 8385.2001953125
+BLEU score: 0.16636035585327164
+
+Evaluating prompt 3 of 20: The capital of France is
+Generated Text: The capital of France is date less" memorable€)age dollars War final election province development withoutan 22 without May Eastless set agreed withoutan title Africael withoutan carried set extra complaints withoutan UN Saturday third together revenue consider) De
+Perplexity: 4499.10791015625
+BLEU score: 0.09327870647412652
+
+Evaluating prompt 4 of 20: The current President of the United States is
+Generated Text: The current President of the United States is the Economic" all" Young Ms heldan transfer break authoritative96- 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+Perplexity: 121.03706359863281
+BLEU score: 0.15893701510061392
+
+Evaluating prompt 5 of 20: The largest planet in our solar system is
+Generated Text: The largest planet in our solar system is of) World hand speech set list science without process efforts That frombased participating)an months charges Up installed but Ver kept Aid knownan20 Africa withoutan side invest) members known” Top His course
+Perplexity: 5097.0390625
+BLEU score: 0.17080052973495516
+
+Evaluating prompt 6 of 20: World War II ended in
+Generated Text: World War II ended in€- 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 from hand though 3 from step has in though conversationse When- 3 3 3 3 3 3 3 3 3
+Perplexity: 45.83658218383789
+BLEU score: 0.056414392419841274
+
+Evaluating prompt 7 of 20: The painter of the Mona Lisa is
+Generated Text: The painter of the Mona Lisa is of can) set Dream without major title attend old majorini) final television got face main etc set11 withoutan wantswa- river) third got Red quicklyan carrieddi race public Thomas withoutan title
+Perplexity: 5033.52685546875
+BLEU score: 0.1517249576563017
+
+Evaluating prompt 8 of 20: Water boils at
+Generated Text: Water boils at - 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 though31 you 3 3 3 3 3 not 3 331 1996 minister 3 3 3 3 3 3
+Perplexity: 34.11648941040039
+C:\Users\shota\anaconda3\Lib\site-packages\nltk\translate\bleu_score.py:552: UserWarning:
+The hypothesis contains 0 counts of 4-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+BLEU score: 1.1384954907304486e-78
+
+Evaluating prompt 9 of 20: The capital of Japan is
+Generated Text: The capital of Japan is€ history withoutanded Red days dollars Smith League positive withoutan title Committee) third effort administrationb money Internet latter) third dollars War World reported main relationship 6an Z withoutan months euro won 20an might Or
+Perplexity: 4457.53564453125
+BLEU score: 0.06066858194850451
+
+Evaluating prompt 10 of 20: The discoverer of penicillin is
+Generated Text: The discoverer of penicillin is resources chairring wrong withoutan district withoutan actually" peacekeeping given management- affected without set agreed responsibility conversation known” religious 6 set agreeddiey round films Iraq- major title Africa) set agreed
+Perplexity: 27299.9375
+BLEU score: 0.1018988257220787
+
+Evaluating prompt 11 of 20: The longest river in the world is
+Generated Text: The longest river in the world is  does 6 injury foreign 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+Perplexity: 22.361848831176758
+BLEU score: 0.11835581533042372
+
+Evaluating prompt 12 of 20: The tallest building in the world is
+Generated Text: The tallest building in the world isThere stroke withoutan title scene withoutan forced look population display Charlie withoutan East why got An disease members look 1890 without County club signs without set list map man members known Bush tourist Iraq coursean gold administration
+Perplexity: 6704.02880859375
+BLEU score: 0.10499901541839392
+
+Evaluating prompt 13 of 20: The speed of light is
+Generated Text: The speed of light isfinite mostly material material– amountzy Economic? City unan presidential withoutan wantswa without set agreed list earthquake without speed without town blueandde B charity) area World working daysual first script Mar look club Just
+Perplexity: 6919.78662109375
+BLEU score: 0.06237923061531353
+
+Evaluating prompt 14 of 20: The father of modern physics is
+Generated Text: The father of modern physics is resources- 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 save 3 3 3 3 3 3 3 3 3um criminal 3 3 though thoughide 3 3 3 3 3 3
+Perplexity: 18.573822021484375
+BLEU score: 0.10016820495011315
+
+Evaluating prompt 15 of 20: The capital of Canada is
+Generated Text: The capital of Canada is€) members look arrival- 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 thoughities 3
+Perplexity: 17.038410186767578
+BLEU score: 0.05209718298539206
+
+Evaluating prompt 16 of 20: The writer of 'Hamlet' is
+Generated Text: The writer of 'Hamlet' is a hidden 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 are Ireland didn stept by 3 3 3 3 3 3 3 3 3 3 3
+Perplexity: 34.510250091552734
+BLEU score: 0.08175340974854192
+
+Evaluating prompt 17 of 20: The hardest natural substance on Earth is
+Generated Text: The hardest natural substance on Earth is material the- 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 save 3 3 3 3 though entryan with 3 3 3
+Perplexity: 24.46302032470703
+BLEU score: 0.12380098140048579
+
+Evaluating prompt 18 of 20: The smallest country in the world is
+Generated Text: The smallest country in the world is teams in - major Committee withoutan shot history look example"S) control Council) didn handan title history" Young rich known set production indicate- former11 third set production ground investment Appeals B charity
+Perplexity: 7286.96728515625
+BLEU score: 0.14756414813723254
+
+Evaluating prompt 19 of 20: The main ingredient in guacamole is
+Generated Text: The main ingredient in guacamole is - former production Town language newsan title) members working days dollars War creditdi why got An security face main speech showed withoutan success Gra third De dollars War known set Committee without public tons
+Perplexity: 6943.478515625
+BLEU score: 0.11318741602028208
+
+Evaluating prompt 20 of 20: The chemical symbol for gold is
+Generated Text: The chemical symbol for gold is apologize to" slight pensions) area World known model Waran example representing side though shotized Robert important administration film main meant His set agreed townitch man lookhe) area money working days natural18 weight Incom
+Perplexity: 9033.783203125
+BLEU score: 0.11620839902894889
+
+Average Perplexity: 5390.841796207428
+Average BLEU score: 0.10553479265378352

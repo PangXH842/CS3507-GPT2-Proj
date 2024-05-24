@@ -1,0 +1,114 @@
+Evaluating prompt 1 of 20: The highest mountain in the world is
+Generated Text: the highest mountain in the world is and body townto bring song player special co started brotheram u45 allied€ artist withoutt and bodyprier hum face come song mainfer rage fingers systemto provide townto highway prime  road prime
+Perplexity: 7665.57080078125
+BLEU score: 0.12758497299770571
+
+Evaluating prompt 2 of 20: The author of 'The Origin of Species' is
+Generated Text: the author of 'the origin of species' is to  vampirero business 9 formula starting told less 2009, frenchif main 2009 played queen thing hidden  public ireland townto position kilometres sp include returned played cover leaves  immediately character 2009,to
+Perplexity: 8649.75
+C:\Users\shota\anaconda3\Lib\site-packages\nltk\translate\bleu_score.py:552: UserWarning:
+The hypothesis contains 0 counts of 3-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+C:\Users\shota\anaconda3\Lib\site-packages\nltk\translate\bleu_score.py:552: UserWarning:
+The hypothesis contains 0 counts of 4-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+BLEU score: 3.6426579016949087e-155
+
+Evaluating prompt 3 of 20: The capital of France is
+Generated Text: the capital of france is19 chart rates townto quickly already leaves  season season season season season season season season season season season season season season season season season season season season season season season season season season season season douglasto season season season
+Perplexity: 25.558420181274414
+BLEU score: 3.011432221282152e-155
+
+Evaluating prompt 4 of 20: The current President of the United States is
+Generated Text: the current president of the united states is committee£ doorto quickly conducted£ graduated£ decemberif main middletoti legal£ french ordermonto provide townto11 already systemto distributedro order find co french francehouse pride northwestern uible
+Perplexity: 9275.8095703125
+BLEU score: 4.1598925242842284e-155
+
+Evaluating prompt 5 of 20: The largest planet in our solar system is
+Generated Text: the largest planet in our solar system is of win season season season season season season season season season season season season season season season season season season season season an canada season season season season season season seasond and season you season season season season season
+Perplexity: 21.516544342041016
+BLEU score: 0.12237355828108318
+
+Evaluating prompt 6 of 20: World War II ended in
+Generated Text: world war ii ended in thoughts 6  region started wait6to ranand include o 2003 perto ship small m played primary townto possible shows  college17 returned mirror real smallto position investment town played queen african confirmed town came success small
+Perplexity: 6044.19091796875
+BLEU score: 3.1640291682362007e-155
+
+Evaluating prompt 7 of 20: The painter of the Mona Lisa is
+Generated Text: the painter of the mona lisa is of  hallfield£ french orderto prime include returned characterto 1920 types small soon feet always feet order mainfer coming five love starting told rest£and find townto everyone smallto already leaves season
+Perplexity: 3979.83154296875
+BLEU score: 1.4780633233764223e-78
+
+Evaluating prompt 8 of 20: Water boils at
+Generated Text: water boils at and  hallto ship townto 1920 types small m ltd come song swedish our call whispered french division toldfer request small user college throughout come song returned108 smallto lies light  season season season season season season season season
+Perplexity: 1228.162109375
+BLEU score: 2.8225949814960253e-155
+
+Evaluating prompt 9 of 20: The capital of Japan is
+Generated Text: the capital of japan is a all norwayp accessible£ close include returnedgene enough joinedland single division told middle tom small soon century cover leaves£andto quickly 2018€ edward century represented song raced couldn€ edward played without hisword women order
+Perplexity: 5479.97705078125
+BLEU score: 4.331874694216408e-155
+
+Evaluating prompt 10 of 20: The discoverer of penicillin is
+Generated Text: the discoverer of penicillin is a 6€ also originalp australia come our played citizens townto provide town played latine into uncle party when 1970 smallto randi trainto without acrossfield co quickly 2018 townto ran port
+Perplexity: 19916.740234375
+BLEU score: 0.0661074021019606
+
+Evaluating prompt 11 of 20: The longest river in the world is
+Generated Text: the longest river in the world is was threatened€ advocate porcelain june town century cheeks£ co december served present clean leaves that century might town charles£ door french france paid increase told rest€ edward century shows u played carl [ townto position
+Perplexity: 3872.82958984375
+BLEU score: 0.11561678083663278
+
+Evaluating prompt 12 of 20: The tallest building in the world is
+Generated Text: the tallest building in the world is of something€ it season season season season season season season season season season season season season season season season season months€ across season season season season season season season market season season season across public  season season
+Perplexity: 25.473068237304688
+BLEU score: 0.11346446511593337
+
+Evaluating prompt 13 of 20: The speed of light is
+Generated Text: the speed of light is' 6 two falls  season season season season season season season season season season season season season season season season season season season across catch  season season season season season season season season season season season season season season season season
+Perplexity: 14.167000770568848
+BLEU score: 1.1190268547570163e-78
+
+Evaluating prompt 14 of 20: The father of modern physics is
+Generated Text: the father of modern physics is committee£ played primary towntotikin€ would  hall complex our singles na uto ran cover townto bintal smallto tryingdown improved possibility 2009im sauntered town7 ste€mca faceto 2018
+Perplexity: 13916.0908203125
+BLEU score: 0.12212865548711085
+
+Evaluating prompt 15 of 20: The capital of Canada is
+Generated Text: the capital of canada is committee visitors visitors quick anger stayed english it 6 their due something u lewis event labelron 6 race season season season season season season season season season season season season season season season season season season season season season season season season
+Perplexity: 94.62714385986328
+BLEU score: 2.878979728837258e-155
+
+Evaluating prompt 16 of 20: The writer of 'Hamlet' is
+Generated Text: the writer of 'hamlet' is thoughts townto quickly€ applied£ blue an senior attack our main wait main joinch always main bus na course problem doorto quickly 2018 townto ran represented townto list kilometres concert rod france games
+Perplexity: 4670.65576171875
+BLEU score: 3.4918948486375036e-155
+
+Evaluating prompt 17 of 20: The hardest natural substance on Earth is
+Generated Text: the hardest natural substance on earth isder alpha anger€ artist prime forto initial pat system waiting£ small played doing africanona  season season season season season season season season season season season season season season season season season season season season season season
+Perplexity: 209.17308044433594
+BLEU score: 0.05467180016810232
+
+Evaluating prompt 18 of 20: The smallest country in the world is
+Generated Text: the smallest country in the world isnot£to ship song main activist starting told gold come started o returned na announced regular makes come started doing african hits town 2013 collaboration past£and twenty songhead plantand december games main small 2013ric
+Perplexity: 6403.95068359375
+BLEU score: 0.09241713818460442
+
+Evaluating prompt 19 of 20: The main ingredient in guacamole is
+Generated Text: the main ingredient in guacamole issfl its£ french order mrs system present 2005 leaves£and thing pat song japan€ simplyto initial represented department  roadac system wife highway metres town century already leaves song main join republic coming£
+Perplexity: 8144.6181640625
+BLEU score: 0.06787181501568366
+
+Evaluating prompt 20 of 20: The chemical symbol for gold is
+Generated Text: the chemical symbol for gold is label season season season season season season season season season season season season season season at season season season season season season season season marriage win season season season from season season season arab season season 1930 season season season season
+Perplexity: 15.5306978225708
+BLEU score: 0.07914930403980065
+
+Average Perplexity: 4982.711160087585
+Average BLEU score: 0.04806929461143088

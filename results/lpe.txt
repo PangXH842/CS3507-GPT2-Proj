@@ -1,0 +1,202 @@
+Evaluating prompt 1 of 20: The highest mountain in the world is
+Generated Text: The highest mountain in the world is still doy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+After
+The
+The
+Perplexity: 3781.048828125
+BLEU score: 0.3399457979288992
+
+Evaluating prompt 2 of 20: The author of 'The Origin of Species' is
+Generated Text: The author of 'The Origin of Species' is expected: "I'll lose an attempt to keep bringing "In October 26-going on Monday morning. It was an actuated the only a short list of a healthy, and a few years ago
+Perplexity: 78.40943145751953
+BLEU score: 0.18902185813291203
+
+Evaluating prompt 3 of 20: The capital of France is
+Generated Text: The capital of France is currently the wholeheartedly committed by their own goal of the two months ago. If you want to do the world's new players from where we can't tell me, where the only a non-crate the nation to the
+Perplexity: 48.99049758911133
+BLEU score: 0.08892786873926031
+
+Evaluating prompt 4 of 20: The current President of the United States is
+Generated Text: The current President of the United States is quite a new national law's not yet is far like the latest day or you want to the new ways to the highest is, The other players would be so we have been doing their own new and you are
+Perplexity: 82.33325958251953
+BLEU score: 0.14183652772983765
+
+Evaluating prompt 5 of 20: The largest planet in our solar system is
+Generated Text: The largest planet in our solar system is now be the country.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C
+"Our
+Perplexity: 3019.394775390625
+BLEU score: 0.38643980380526444
+
+Evaluating prompt 6 of 20: World War II ended in
+Generated Text: World War II ended in a friend of the same week, they're still a large group of a few of the original story or perhaps it goes with a way he was made some other nations's going with the way at the highest rated the same thing
+Perplexity: 61.77150344848633
+BLEU score: 0.09576248453721153
+
+Evaluating prompt 7 of 20: The painter of the Mona Lisa is
+Generated Text: The painter of the Mona Lisa is a few words of a lot "A final, it was forced a large range of them would soon to prove to bemo said.
+Perplexity: 126.10210418701172
+BLEU score: 0.18904254678403262
+
+Evaluating prompt 8 of 20: Water boils at
+Generated Text: Water boils at the United States and the time when the country -1) that we doyas they're not yet to the fastest way of the same thing if you're not seen as well-like the NODESTAILENTERICA
+Perplexity: 46.1235466003418
+C:\Users\shota\anaconda3\Lib\site-packages\nltk\translate\bleu_score.py:552: UserWarning:
+The hypothesis contains 0 counts of 4-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+BLEU score: 1.3578715688059563e-78
+
+Evaluating prompt 9 of 20: The capital of Japan is
+Generated Text: The capital of Japan is going to make it's not necessarily not fully understood that he thought about the final decision to be contacted my friends or maybe the best of the USATI am not necessarily was the country in the first of a few days before
+Perplexity: 49.472740173339844
+BLEU score: 0.0842816865856957
+
+Evaluating prompt 10 of 20: The discoverer of penicillin is
+Generated Text: The discoverer of penicillin is probably also have the next morning to the first name of the first official.
+Perplexity: 118.44445037841797
+BLEU score: 0.18951629567590741
+
+Evaluating prompt 11 of 20: The longest river in the world is
+Generated Text: The longest river in the world is really just done to be forced down from the way around their personal favorite I know the game they got a very far enough of the majority of a very much simpler ways to hispanic, one big things that are not
+Perplexity: 85.27362060546875
+BLEU score: 0.12966301701727728
+
+Evaluating prompt 12 of 20: The tallest building in the world is
+Generated Text: The tallest building in the world is so it had never made sure that a way they lost the highest school, and the future. At least ten months ago, it was already gone to make up a few days of the rest of the first and other
+Perplexity: 48.08707809448242
+BLEU score: 0.13251445746341228
+
+Evaluating prompt 13 of 20: The speed of light is
+Generated Text: The speed of light is probably already put their own the same number of the highest in a second, and they needed to have no one of the number of the way of an essentially asked why my favorite things, or even three days ago.
+Perplexity: 58.598731994628906
+BLEU score: 0.0856011448584366
+
+Evaluating prompt 14 of 20: The father of modern physics is
+Generated Text: The father of modern physics is a little more than our state legislators, a lot has no more than the latest story behind the third thing from the last week of the first wave of the world of the same-to-A couple of the first stage
+Perplexity: 52.2870979309082
+BLEU score: 0.1138130543686042
+
+Evaluating prompt 15 of 20: The capital of Canada is
+Generated Text: The capital of Canada is also, a good reason for a different three separate day after the first day, the new member of both of the one year ago this system, the number, "we are just one of the number of these people's been
+Perplexity: 71.29557800292969
+BLEU score: 0.0847400567745194
+
+Evaluating prompt 16 of 20: The writer of 'Hamlet' is
+Generated Text: The writer of 'Hamlet' is no doubt they had become increasingly complicated things is not always felt the rest of the "Dota or even greater than did not quite much more than all things like going for most dangerous enough to the only to a
+Perplexity: 66.18354797363281
+BLEU score: 0.09321701825411031
+
+Evaluating prompt 17 of 20: The hardest natural substance on Earth is
+Generated Text: The hardest natural substance on Earth is definitely needed to be found that their own and also found the next year after a few and we'd be considered the first ever a few people would love it felt the right to use of the second of S.
+Perplexity: 87.07918548583984
+BLEU score: 0.12237355828108318
+
+Evaluating prompt 18 of 20: The smallest country in the world is
+Generated Text: The smallest country in the world is the right this one event that was a few thousand times the two months of a lot of some way it is now we could use of the last night before going to put out a good old day it should have an
+Perplexity: 65.83609008789062
+BLEU score: 0.1261553619628621
+
+Evaluating prompt 19 of 20: The main ingredient in guacamole is
+Generated Text: The main ingredient in guacamole is a couple-for that does not entirely the first part of the same thing is my wife and a few of the majority of it was never more than the first-dressed by a little much more than
+Perplexity: 66.519775390625
+BLEU score: 0.12224986162816123
+
+Evaluating prompt 20 of 20: The chemical symbol for gold is
+Generated Text: The chemical symbol for gold is set, The difference.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TheM(I don
+
+"
+Perplexity: 2164.40478515625
+BLEU score: 0.4172261448611506
+
+Average Perplexity: 508.8828313827515
+Average BLEU score: 0.1566164272694319

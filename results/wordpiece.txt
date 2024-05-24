@@ -1,0 +1,120 @@
+Evaluating prompt 1 of 20: The highest mountain in the world is
+Generated Text: the highest mountain in the world is [unused11] [unused85] [unused16] [unused10] [unused309] [unused455] [unused465] [unused761] [unused257] [unused971] ɑ [unused10] [unused252] approximately [unused281] [unused423] chief [unused779] [unused335] [unused333] ש [unused282] [unused257] [unused971] ɑ [unused701] philippines [unused611] sound ন [unused417] [unused257] [unused971] — [unused313] [unused778] [unused302] divisions [unused61] [unused14] [unused11]
+Perplexity: 2145907.25
+BLEU score: 0.0973834065412635
+
+Evaluating prompt 2 of 20: The author of 'The Origin of Species' is
+Generated Text: the author of'the origin of species'isnger existence ե [unused340] [unused760] [unused279] [unused461] [unused340] [unused755] [unused698] न [unused279] வ [unused335] [unused313] ⁷ communist [unused335] [unused313] [unused252] ψ urban [unused279] a popular [unused693] fight [unused281] 北 [unused282] [unused257] [unused466] [unused12] ɪ [unused418] [unused640] front [unused616]
+Perplexity: 2800747.75
+C:\Users\shota\anaconda3\Lib\site-packages\nltk\translate\bleu_score.py:552: UserWarning:
+The hypothesis contains 0 counts of 2-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+C:\Users\shota\anaconda3\Lib\site-packages\nltk\translate\bleu_score.py:552: UserWarning:
+The hypothesis contains 0 counts of 3-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+C:\Users\shota\anaconda3\Lib\site-packages\nltk\translate\bleu_score.py:552: UserWarning:
+The hypothesis contains 0 counts of 4-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+BLEU score: 9.363140134330432e-232
+
+Evaluating prompt 3 of 20: The capital of France is
+Generated Text: the capital of france is [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused459] 手 [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused459] [unused44] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused0] ″ є [unused193] [unused193] [unused193] [unused193]
+Perplexity: 2342360.75
+BLEU score: 3.0609232467155214e-155
+
+Evaluating prompt 4 of 20: The current President of the United States is
+Generated Text: the current president of the united states is [unused7] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused43] < [unused193] [unused193] [unused193] [unused459] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193]
+Perplexity: 2132180.5
+BLEU score: 3.387468414730567e-155
+
+Evaluating prompt 5 of 20: The largest planet in our solar system is
+Generated Text: the largest planet in our solar system is [unused11] [unused65] [unused972] [unused409] [unused281] [unused361] [unused459] ש [unused313] [unused518] [unused876] [unused281] [unused257] [unused729] • [unused388] [unused257] [unused971] yes [unused635] [unused285] [unused252] [unused609] than [unused10] [unused479] [unused472] accompanied [unused301] psychology [unused525] — [unused321] ɑ [unused606] [unused479] [unused816] [unused402] [unused767] [unused512]
+Perplexity: 2751765.0
+BLEU score: 0.11580903994207307
+
+Evaluating prompt 6 of 20: World War II ended in
+Generated Text: world war ii ended in [unused12] [unused309] [unused368] ᄌ [unused462] [unused324] [unused252] approximately [unused579] ג [unused709] [unused302] ᵈ [unused279] [unused302] ᵈ [unused279] norman [unused257] [unused971] yes me [unused281] [unused257] [unused579] [unused656] [unused556] س [unused252] ψ 竹 than [unused24] [unused361] [unused33] no [unused257] [unused361] ʎ ح [unused418] [unused582] ս
+Perplexity: 3291042.0
+BLEU score: 2.848510046732156e-155
+
+Evaluating prompt 7 of 20: The painter of the Mona Lisa is
+Generated Text: the painter of the mona lisa is anything [unused616] [unused833] [unused279] [unused257] [unused830] [unused340] [unused831] [unused465] [unused767] ɛ • [unused873] [unused257] [unused840] [unused875] egg [unused335] [unused313] [unused257] [unused686] [unused252] [unused917] [unused10] [unused503] [unused545] [unused650] 平 [unused465] [unused767] [unused512] [unused616] sat [unused279] [unused302] ʐ [unused335] [unused333] [unused402] 分 [unused350]
+Perplexity: 2946323.25
+BLEU score: 1.2100738507710834e-78
+
+Evaluating prompt 8 of 20: Water boils at
+Generated Text: water boils at adjusted [unused13] [unused68] [unused969] [unused273] [unused281] [unused257] № 小 [unused281] [unused252] მ [unused281] [unused257] [unused971] ɑ [unused281] [unused257] wine [unused11] [unused254] [unused11] adelaide [unused301] cinematic [unused335] [unused476] ք œ shock avoided [unused281] [unused252] 『 [unused763] [unused281] [unused257] [unused971] ɑ [unused388] [unused257] [unused361] [unused39] [unused12]
+Perplexity: 3088972.0
+BLEU score: 2.6014518513295508e-155
+
+Evaluating prompt 9 of 20: The capital of Japan is
+Generated Text: the capital of japan is xi fortune [unused57] [unused51] rio [unused51] [unused12] [unused378] [unused744] across [unused279] native [unused417] [unused658] [unused893] [unused525] ɑ [unused324] entire pet [unused281] [unused257] overall railroad [unused423] կ [unused281] [unused257] ӏ [unused12] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193]
+Perplexity: 3347998.75
+BLEU score: 3.0609232467155214e-155
+
+Evaluating prompt 10 of 20: The discoverer of penicillin is
+Generated Text: the discoverer of penicillin is [unused7] [unused542] [unused252] 史 [unused281] [unused257] [unused644] 信 [unused281] [unused252] [unused917] [unused830] [unused279] [unused761] [unused335] [unused313] [unused276] common [unused257] [unused971] — [unused10] [unused470] [unused252] m — [unused351] [unused760] [unused279] வ 城 [unused518] [unused321] [unused479] г [unused302]tania [unused12] [unused549] [unused423]
+Perplexity: 3249045.0
+BLEU score: 0.05209718298539206
+
+Evaluating prompt 11 of 20: The longest river in the world is
+Generated Text: the longest river in the world is [unused301] [unused279] [unused423] ɑ [unused252] [unused840] [unused875] [unused10] [unused518] [unused876] [unused512] [unused616] [unused368] speed [unused350] [unused334] [unused463] [unused582] porcelain [unused257] յ requires [unused545] [unused257] [unused971] — [unused10] [unused257] ɑ [unused388] - [unused257] [unused466] [unused12] ट [unused257] [unused971] [unused10] [unused285] [unused309] ₂
+Perplexity: 2919914.5
+BLEU score: 0.0973834065412635
+
+Evaluating prompt 12 of 20: The tallest building in the world is
+Generated Text: the tallest building in the world is hampstead [unused225] [unused225] flush [unused144] [unused219]uce [unused95] [unused103] [unused103] [unused240] selecting [unused225] [unused225] [unused225] [unused231] flickering [unused104] [unused104] [unused223] [unused223] [unused240] [unused241] [unused156] [unused246] [unused227] [unused158] hampstead does [unused243] [unused156] [unused104] [unused107] [unused243] [unused111] [unused240] [unused240] [unused240] [unused96] [unused241]
+Perplexity: 2501473.25
+BLEU score: 0.10176289493427026
+
+Evaluating prompt 13 of 20: The speed of light is
+Generated Text: the speed of light is [unused87] [unused957] [unused258] [unused281] [unused257] [unused712] 夏 [unused334] [unused545] wrote ！ [unused417] [unused257] [unused830] [unused388] [unused606] [unused479] [unused709] [unused402] œ [unused461] [unused402] knight а trick [unused281] [unused257] [unused686] [unused411] [unused257] ں [unused279] [unused257] ρ stephen [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193]
+Perplexity: 2837935.0
+BLEU score: 0.04761298946116126
+
+Evaluating prompt 14 of 20: The father of modern physics is
+Generated Text: the father of modern physics is [unused954] [unused616] [unused472] [unused281] [unused257] court [unused631] [unused281] [unused257] ӏ [unused11] ο [unused971] ・ [unused309] [unused368] [unused402] [unused760] [unused423] [unused313] point 鈴 [unused321] [unused313] [unused640] front [unused616] [unused334] [unused463] ք awards [unused10] [unused281] [unused772] [unused579] else [unused279] [unused257] [unused712] [unused281] [unused257] [unused686]
+Perplexity: 3054600.75
+BLEU score: 0.07451835561685542
+
+Evaluating prompt 15 of 20: The capital of Canada is
+Generated Text: the capital of canada is [unused81] [unused285] [unused252] squadron hires [unused301] farm [unused346] [unused257] under — [unused324] [unused611] asian [unused830] [unused340] q 代 [unused411] [unused257] [unused304] issued [unused527] [unused15] [unused12] [unused549] [unused257] [unused322] [unused18] [unused395] [unused577] alone [unused281] [unused257] ᄆ ل [unused36] bran [unused807] ᄑ ג [unused279] [unused257]
+Perplexity: 2895653.0
+BLEU score: 2.848510046732156e-155
+
+Evaluating prompt 16 of 20: The writer of 'Hamlet' is
+Generated Text: the writer of'hamlet'is [unused12] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] < [unused459] take [unused623] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193]
+Perplexity: 2332510.0
+BLEU score: 8.412065649527267e-232
+
+Evaluating prompt 17 of 20: The hardest natural substance on Earth is
+Generated Text: the hardest natural substance on earth is [unused71] [unused12] [unused378] way [unused281] [unused257] セ [unused252] m [unused11]ography protecting [unused10] [unused334] [unused526] [unused873] [unused257] leftey [unused285] [unused506] toe republican [unused10] [unused285] [unused257] [unused644] parts [unused252] ψ republican [unused281] [unused506] risk [unused281] [unused252] slipped [unused281] [unused257] ں [unused12]
+Perplexity: 5500227.0
+BLEU score: 0.05260868474998189
+
+Evaluating prompt 18 of 20: The smallest country in the world is
+Generated Text: the smallest country in the world is [unused279] [unused782] け [unused334] ₂ because [unused616] [unused257] [unused971] yes guess [unused11] [unused76] oscar [unused10] [unused340] [unused384] [unused402] division а trick [unused12] [unused882] [unused335] [unused368] [unused257] [unused971] — [unused314] [unused252] ب [unused281] [unused257] [unused971] ɑ [unused846] [unused976] [unused351] [unused384] [unused402] [unused302]
+Perplexity: 2909341.0
+BLEU score: 0.0973834065412635
+
+Evaluating prompt 19 of 20: The main ingredient in guacamole is
+Generated Text: the main ingredient in guacamole isichi generatedite [unused10] [unused470] [unused640] [unused525] [unused281] [unused257] 久 [unused281] [unused602] israel alone [unused324] [unused257] ل ᵒ [unused10] [unused470] [unused257] ¨ [unused12] [unused627] [unused313] [unused402] division [unused875] [unused324] [unused252] [unused840] ∅ [unused279] வ [unused505] loco [unused279] [unused257] [unused361]
+Perplexity: 4644469.5
+BLEU score: 0.056414392419841274
+
+Evaluating prompt 20 of 20: The chemical symbol for gold is
+Generated Text: the chemical symbol for gold is [unused67] [unused12] [unused309] [unused745] [unused402] [unused686] [unused508] en [unused81] [unused384] [unused252] approximately [unused281] [unused252] five seat [unused423] [unused609] than [unused12] $ [unused340] [unused816] 伊 [unused314]ro foot [unused12] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193] [unused193]
+Perplexity: 2813380.5
+BLEU score: 0.07615710086645162
+
+Average Perplexity: 3025292.3375
+Average BLEU score: 0.04345654302999087
