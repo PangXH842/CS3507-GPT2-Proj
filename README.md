@@ -1,4 +1,4 @@
-﻿# CS3507-GPT2-Proj
+# CS3507-GPT2-Proj
 
 This is a final project of the SJTU 2023-2024-2 CS3507 course based on OpenAI's GPT-2, which consists of two parts. 
 
@@ -18,6 +18,12 @@ Part 1 works on fine-tuning the GPT-2 model. The dataset we have chosen to finet
     - positionals.py
     - token_encodings.py
     - evaluation.py
+```
+
+Required libraries:
+
+```
+pandas torch torchvision datasets transformers nltk
 ```
 
 To successfully run this project, follow the steps below:
@@ -53,4 +59,4 @@ Optionally, `text_generation.py` can be run to test and compare the outputs of t
     to view the effect of applying different attention mechanisms to input tensors
 
 ### Conclusion
-This project provides a comprehensive framework for fine-tuning and evaluating the GPT-2 model using various attention mechanisms, positional encodings, and tokenizers. The evaluation script is the key to obtaining and comparing the results of the original and fine-tuned models. Follow the steps outlined above to get started with the fine-tuning and evaluation process.
+This project provides a framework for fine-tuning and modifying the GPT-2 model using various tokenizers, positional encodings, and attention mechanisms. 
